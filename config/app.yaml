@@ -1,1 +1,7 @@
 debug: true
+
+
+# 默认分页大小
+defaultPageSize: 20
+# 无分页获取所有数据时的最大数据条数
+allDataLimit: 1000

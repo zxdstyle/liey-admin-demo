@@ -1,1 +1,2 @@
 address: ":80"
+dumpRouterMap: true
