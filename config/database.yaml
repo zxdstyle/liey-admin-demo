@@ -1,5 +1,28 @@
-host: 47.93.181.102
-port: 3306
-database: liey
-username: zxdstyle
-password: a8968640
+# 默认数据库连接名称
+# 指定您希望以下的哪些数据库连接用作所有数据库操作的默认连接。
+default: mysql
+
+# 数据库连接
+# Liey-Admin 中的所有数据库操作都是通过 Gorm 完成
+# 所以需要确保所有的链接都支持特定数据库的驱动程序
+connections:
+  default:
+    driver: mysql
+    host: 127.0.0.1
+    port: 3306
+    database: liey
+    username: root
+    password: a8968640
+    # 主从配置, 配置主从之后，查询默认使用从数据库，写默认使用主数据库
+    sources:
+    replicas:
+      - read
+    # 负载均衡策略，目前只实现了随机（random）
+    policy: random
+  read:
+    driver: mysql
+    host: 127.0.0.1
+    port: 3306
+    database: liey
+    username: root
+    password: a8968640

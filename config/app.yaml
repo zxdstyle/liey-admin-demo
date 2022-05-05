@@ -1,5 +1,12 @@
 debug: true
 
+# 语言
+locale: en
+# 备用语言
+fallbackLocale: en
+# 多语言文件目录
+i18nPath:
+  - resources/lang
 
 # 默认分页大小
 defaultPageSize: 20
