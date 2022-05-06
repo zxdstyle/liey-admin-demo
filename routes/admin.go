@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/zxdstyle/liey-admin-demo/app/handler"
 	"github.com/zxdstyle/liey-admin-scaffold"
 	"github.com/zxdstyle/liey-admin/framework/adm"
 	"github.com/zxdstyle/liey-admin/framework/http/server"
@@ -12,6 +13,8 @@ func init() {
 
 		// 脚手架路由注册
 		scaffold.RegisterRoutes(group)
+
+		group.POST("login", handler.LoginByPassword)
 
 	})
 }

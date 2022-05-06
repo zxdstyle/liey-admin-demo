@@ -6,11 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a9b46ab4-89be-4620-8883-357664797485" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/plugins/test.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/validation.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/logic/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/logic/role/logic.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/role.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/role/db.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/role/reposiotry.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +29,14 @@
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -55,7 +65,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
