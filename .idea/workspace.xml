@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a9b46ab4-89be-4620-8883-357664797485" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/role/logic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/role.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/role/db.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/role/reposiotry.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/handler/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/auth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,9 +43,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../liey-admin-scaffold/http/handler/permissions.go" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/../liey-admin-scaffold/http/handler/roles.go" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/../liey-admin-scaffold/http/model/permission.go" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/../liey-admin-scaffold/http/model/role.go" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/../liey-admin/framework/http/bases/base_repository.go" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/../liey-admin-scaffold/http/model/permission.go" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="28L0IsOlI3wynLCUU6I1gEBBWMR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -56,17 +58,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DefaultGoTemplateProperty" value="Go File" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="go.formatter.settings.were.checked" value="true" />
-    <property name="go.import.settings.migrated" value="true" />
-    <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zxdstyle&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources" />
@@ -114,15 +117,14 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
-    <integration-enabled>true</integration-enabled>
     <environment>
       <map>
         <entry key="GOPROXY" value="https://goproxy.io,direct" />
       </map>
     </environment>
+    <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

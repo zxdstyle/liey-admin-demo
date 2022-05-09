@@ -7,3 +7,7 @@ type User struct {
 	Username string
 	Password string
 }
+
+func (u User) Guard() string {
+	return "api"
+}

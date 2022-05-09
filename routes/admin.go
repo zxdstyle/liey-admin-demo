@@ -2,8 +2,9 @@ package routes
 
 import (
 	"github.com/zxdstyle/liey-admin-demo/app/handler"
-	"github.com/zxdstyle/liey-admin-scaffold"
+	scaffold "github.com/zxdstyle/liey-admin-scaffold"
 	"github.com/zxdstyle/liey-admin/framework/adm"
+	"github.com/zxdstyle/liey-admin/framework/http/middleware"
 	"github.com/zxdstyle/liey-admin/framework/http/server"
 )
 
@@ -15,6 +16,10 @@ func init() {
 		scaffold.RegisterRoutes(group)
 
 		group.POST("login", handler.LoginByPassword)
+
+		group.Middleware(middleware.Authenticate("api"))
+
+		group.GET("users", handler.UserInfo)
 
 	})
 }
