@@ -1,10 +1,12 @@
 package app
 
 import (
+	"github.com/zxdstyle/liey-admin-demo/app/jobs"
 	scaffold "github.com/zxdstyle/liey-admin-scaffold"
 	"github.com/zxdstyle/liey-admin-scaffold/http/model"
 	"github.com/zxdstyle/liey-admin/framework/auth/guards"
 	"github.com/zxdstyle/liey-admin/framework/plugins"
+	"github.com/zxdstyle/liey-admin/framework/queue/job"
 )
 
 type Kernel struct {
@@ -20,5 +22,12 @@ func (Kernel) Boot() {
 func (Kernel) Plugins() []plugins.Plugin {
 	return []plugins.Plugin{
 		plugins.WithRename(scaffold.Plugin{}, "scaffolds"),
+	}
+}
+
+// Queues 注册队列
+func (Kernel) Queues() []job.Job {
+	return []job.Job{
+		jobs.SendEmail{},
 	}
 }

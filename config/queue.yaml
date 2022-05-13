@@ -1,0 +1,10 @@
+default: "nsq"
+queues:
+  default:
+    driver: nsq
+    connection: nsq
+connections:
+  nsq:
+    host: 127.0.0.1:4150
+    lookupd: "zxdstyle.local:4161"
+    secret:

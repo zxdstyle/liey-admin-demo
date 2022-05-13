@@ -20,6 +20,5 @@ func init() {
 		group.Middleware(middleware.Authenticate("api"))
 
 		group.GET("users", handler.UserInfo)
-
 	})
 }
