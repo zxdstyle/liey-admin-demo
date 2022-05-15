@@ -8,8 +8,8 @@ require (
 )
 
 replace (
-	github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d => ../liey-admin
-	github.com/zxdstyle/liey-admin-scaffold v0.0.0-20220430103106-2cb81f06a9d1 => ../liey-admin-scaffold
+	github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d => ../../liey-admin
+	github.com/zxdstyle/liey-admin-scaffold v0.0.0-20220430103106-2cb81f06a9d1 => ../../liey-admin-scaffold
 )
 
 require (

@@ -1,16 +1,14 @@
 package auth
 
-import (
-	"github.com/zxdstyle/liey-admin-demo/app/repository"
-	"github.com/zxdstyle/liey-admin/framework/http/bases"
-)
+import "context"
 
 type Logic struct {
-	*bases.BaseLogic
 }
 
 func NewLogic() *Logic {
-	return &Logic{
-		BaseLogic: bases.NewBaseLogic(repository.Admin),
-	}
+	return &Logic{}
+}
+
+func (Logic) Login(ctx context.Context) {
+
 }

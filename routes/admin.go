@@ -15,10 +15,8 @@ func init() {
 		// 脚手架路由注册
 		scaffold.RegisterRoutes(group)
 
-		group.POST("login", handler.LoginByPassword)
+		group.POST("login", handler.Auth.Login)
 
 		group.Middleware(middleware.Authenticate("api"))
-
-		group.GET("users", handler.UserInfo)
 	})
 }
