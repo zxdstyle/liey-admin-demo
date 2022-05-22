@@ -11,7 +11,7 @@ import type { PropType } from 'vue';
 import { isString } from 'lodash-es';
 import { useRuleFormItem } from '@/hooks/core/useFormItem';
 
-type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean };
+type OptionsItem = { label: string; value: string | number; disabled?: boolean };
 type RadioItem = string | OptionsItem;
 
 export default defineComponent({
@@ -19,7 +19,7 @@ export default defineComponent({
   components: {},
   props: {
     value: {
-      type: [String, Number, Boolean] as PropType<string | number | boolean>
+      type: [String, Number] as PropType<string | number>
     },
     options: {
       type: Array as PropType<RadioItem[]>,

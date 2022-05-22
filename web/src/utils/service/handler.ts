@@ -5,7 +5,7 @@ export async function handleServiceResult<T = any>(error: Service.RequestError |
       error,
       data: null
     };
-    return fail;
+    return Promise.reject(fail);
   }
   const success: Service.SuccessResult<T> = {
     error: null,

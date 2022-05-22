@@ -1,33 +1,131 @@
 <template>
-  <n-card class="rounded-xl">
+  <n-card class="rounded-xl h-full">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <n-button type="primary" @click="openModal"><Icon icon="ph:plus-bold"></Icon>新增菜单</n-button>
+        <n-button type="primary" @click="openCreateModal"><Icon icon="ph:plus-bold"></Icon>新增菜单</n-button>
       </template>
     </BasicTable>
 
-    <BasicModal style="width: 1000px" @register="registerModal">
-      <MenuForm></MenuForm>
+    <BasicModal style="width: 900px" @register="registerModal">
+      <MenuForm v-bind="getFormBind"></MenuForm>
     </BasicModal>
   </n-card>
 </template>
 
-<script lang="ts" setup>
-import { onMounted } from 'vue';
+<script lang="tsx" setup>
+import { computed, h, reactive } from 'vue';
+import { NButton } from 'naive-ui';
 import { Icon } from '@iconify/vue';
-import { BasicTable, useTable } from '@/components/basic/table';
+import { iconifyRender } from '@/utils';
+import { BasicTable, useTable, TableAction } from '@/components/basic/table';
 import { BasicModal, useModal } from '@/components/basic/modal';
+import { ApiSwitch } from '@/components/basic/form';
+import ApiMenu from '@/service/api/scaffold/menu';
 import MenuForm from './form.vue';
 
 defineProps({});
 
-const [registerModal, { openModal }] = useModal();
+const [registerModal, { openModal, setModalProps, closeModal }] = useModal();
 
-const [registerTable] = useTable({
-  columns: [{ key: 'id', title: 'ID' }]
+const actions: TableAction = [
+  { key: 'edit', label: '编辑', icon: iconifyRender('ep:edit', '', 18) },
+  { type: 'divider' },
+  {
+    key: 'delete',
+    label: '删除',
+    icon: iconifyRender('ci:trash-full', 'red', 18),
+    props: { class: 'important-text-red' }
+  }
+];
+
+const [registerTable, { reload }] = useTable<Api.Menu>({
+  api: ApiMenu.Index,
+  columns: [
+    { key: 'id', title: 'ID' },
+    { key: 'title', title: '菜单名称' },
+    { key: 'name', title: '菜单唯一标识' },
+    { key: 'path', title: '菜单路径' },
+    {
+      key: 'hidden',
+      title: '是否显示到菜单',
+      render(row) {
+        return (
+          <ApiSwitch
+            v-model:value={row.hidden}
+            api={(params: any) => ApiMenu.Update(row.id, params)}
+            field="hidden"
+          ></ApiSwitch>
+        );
+      }
+    },
+    { key: 'sort_num', title: '排序值' },
+    {
+      key: 'icon',
+      title: '图标',
+      render({ icon }) {
+        return h(
+          'div',
+          {
+            class: ['flex', 'gap-2']
+          },
+          [
+            h(Icon, {
+              icon,
+              style: { fontSize: '24px' }
+            }),
+            icon
+          ]
+        );
+      }
+    },
+    {
+      key: 'action',
+      title: '操作',
+      align: 'center',
+      render(row) {
+        return <TableAction actions={actions} onSelect={(key: string) => handleTableAction(key, row)} />;
+      }
+    }
+  ]
 });
 
-onMounted(() => openModal());
+const state = reactive({
+  model: {}
+});
+
+const openEditModal = () => {
+  setModalProps({ title: '编辑菜单' });
+  openModal();
+};
+
+function handleTableAction(key: string, row: Api.Menu) {
+  switch (key) {
+    case 'edit':
+      state.model = row;
+      openEditModal();
+      break;
+    case 'delete':
+      break;
+    default:
+  }
+}
+
+const openCreateModal = () => {
+  openModal();
+  setModalProps({ title: '新增菜单' });
+};
+
+const getFormBind = computed(() => {
+  return {
+    model: state.model,
+    onSubmit: () => {
+      closeModal();
+      reload();
+    }
+  };
+});
+
+// onMounted(() => openCreateModal());
 </script>
 
 <style lang="less" scoped></style>

@@ -21,7 +21,7 @@ interface ActionType {
 // }
 
 export function useDataSource(
-  propsRef: ComputedRef<BasicTableProps>,
+  propsRef: ComputedRef<BasicTableProps<any>>,
   { setLoading, tableData, setPagination, getPaginationInfo }: ActionType
 ) {
   const dataSourceRef = ref<Recordable[]>([]);

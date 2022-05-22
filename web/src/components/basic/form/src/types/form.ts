@@ -164,7 +164,7 @@ export interface FormSchema {
   componentProps?:
     | ((opt: {
         schema: FormSchema;
-        tableAction: TableActionType;
+        tableAction: TableActionType<any>;
         formActionType: FormActionType;
         formModel: Recordable;
       }) => Recordable)

@@ -58,7 +58,7 @@ const { loading, startLoading, endLoading } = useLoading();
 const buttonExample: ButtonExample[] = [
   {
     id: 0,
-    label: '基础',
+    label: '基础1',
     buttons: [
       {
         id: 0,

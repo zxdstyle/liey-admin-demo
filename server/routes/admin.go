@@ -11,8 +11,10 @@ func init() {
 	s := adm.Server()
 	s.Group("api/v1", func(v1 *server.RouterGroup) {
 		v1.POST("login", handler.Auth.Login)
+		v1.Resource("admins", handler.Admin{})
 		v1.Middleware(middleware.Authenticate("api"))
 		v1.GET("userinfo", handler.Auth.Userinfo)
-		v1.Resource("admins", handler.Admin{})
+		v1.Resource("menus", handler.ApiMenu)
+		v1.GET("tree-menus", handler.ApiMenu.TreeData)
 	})
 }

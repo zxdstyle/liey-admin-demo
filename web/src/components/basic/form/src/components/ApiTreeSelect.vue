@@ -19,16 +19,25 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    afterFetch: { type: Function, default: () => {} }
+    afterFetch: {
+      type: Function,
+      default: (data: Recordable) => data
+    },
+    value: [String, Number]
   },
-  emits: ['options-change'],
+  emits: ['options-change', 'update:value'],
   setup(props, { emit, attrs }) {
     const { startLoading, endLoading, loading } = useLoading();
     const treeData = ref<Recordable[]>([]);
     const isFirstLoaded = ref<boolean>(false);
     const getAttrs = computed(() => {
       return {
-        ...attrs
+        defaultExpandAll: true,
+        ...attrs,
+        options: treeData.value,
+        loading: loading.value,
+        value: props.value,
+        'onUpdate:value': (value: String | Number) => emit('update:value', value)
       };
     });
 
@@ -50,7 +59,8 @@ export default defineComponent({
       treeData.value = [];
       let result;
       try {
-        result = await api(props.params);
+        const { data } = await api(props.params);
+        result = data;
       } catch (e) {
         console.error(e);
       }
@@ -66,7 +76,7 @@ export default defineComponent({
       emit('options-change', treeData.value);
     }
 
-    return { getAttrs, loading };
+    return { getAttrs };
   }
 });
 </script>

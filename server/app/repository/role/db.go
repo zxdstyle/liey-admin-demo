@@ -5,14 +5,13 @@ import (
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin/framework/adm"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
-	"github.com/zxdstyle/liey-admin/framework/http/requests"
 )
 
 type dbRepository struct {
 	*bases.GormRepository
 }
 
-func NewDbRepository() Repository {
+func NewDbRepository() *dbRepository {
 	return &dbRepository{
 		GormRepository: bases.NewGormRepository(adm.DB().Model(model.Role{})),
 	}
@@ -28,9 +27,9 @@ func (repo *dbRepository) AttachPermissions(ctx context.Context, role *model.Rol
 		return err
 	}
 
-	if err := repo.Show(ctx, requests.Resources{"Permissions"}, role); err != nil {
-		return err
-	}
+	//if err := repo.Show(ctx, requests.Resources{"Permissions"}, role); err != nil {
+	//	return err
+	//}
 
 	return nil
 }
@@ -57,9 +56,9 @@ func (repo *dbRepository) SyncPermissions(ctx context.Context, role *model.Role,
 		return err
 	}
 
-	if err := repo.Show(ctx, requests.Resources{"Permissions"}, role); err != nil {
-		return err
-	}
+	//if err := repo.Show(ctx, requests.Resources{"Permissions"}, role); err != nil {
+	//	return err
+	//}
 
 	return nil
 }

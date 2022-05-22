@@ -1,5 +1,5 @@
 import UAParser from 'ua-parser-js';
-import { useAuthStore } from '@/store';
+// import { useAuthStore } from '@/store';
 import { isArray, isString } from '@/utils';
 
 interface AppInfo {
@@ -31,11 +31,11 @@ export function useDeviceInfo() {
 
 /** 权限判断 */
 export function usePermission() {
-  const auth = useAuthStore();
+  // const auth = useAuthStore();
 
   function hasPermission(permission: Auth.RoleType | Auth.RoleType[]) {
-    const { userRole } = auth.userInfo;
-
+    // const { userRole } = auth.userInfo;
+    const userRole = 'super';
     let has = userRole === 'super';
     if (!has) {
       if (isArray(permission)) {

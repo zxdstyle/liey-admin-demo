@@ -89,7 +89,7 @@ export const basicProps = {
 
   layout: propTypes.oneOf(['horizontal', 'vertical', 'inline']).def('horizontal'),
   tableAction: {
-    type: Object as PropType<TableActionType>
+    type: Object as PropType<TableActionType<any>>
   },
 
   wrapperCol: Object as PropType<Partial<ColEx>>,

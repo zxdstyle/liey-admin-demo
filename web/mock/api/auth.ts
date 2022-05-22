@@ -34,15 +34,14 @@ const apis: MockMethod[] = [
         };
       }
 
-      const findItem = userModel.find(item => item.userName === userName && item.password === password);
+      const findItem = userModel.find(item => item.username === userName && item.password === password);
 
       if (findItem) {
         return {
           code: 200,
           message: 'ok',
           data: {
-            token: findItem.token,
-            refreshToken: findItem.refreshToken
+            token: findItem.token
           }
         };
       }
@@ -70,15 +69,17 @@ const apis: MockMethod[] = [
         };
       }
       const userInfo: Auth.UserInfo = {
-        userId: '',
-        userName: '',
-        userRole: 'user'
+        id: 1,
+        username: '',
+        email: '',
+        avatar: '',
+        created_at: ''
       };
       const isInUser = userModel.some(item => {
         const flag = item.token === authorization;
         if (flag) {
-          const { userId: itemUserId, userName, userRole } = item;
-          Object.assign(userInfo, { userId: itemUserId, userName, userRole });
+          const { id: itemUserId, username } = item;
+          Object.assign(userInfo, { userId: itemUserId, username });
         }
         return flag;
       });
@@ -111,8 +112,7 @@ const apis: MockMethod[] = [
           code: 200,
           message: 'ok',
           data: {
-            token: findItem.token,
-            refreshToken: findItem.refreshToken
+            token: findItem.token
           }
         };
       }

@@ -12,25 +12,25 @@ type Permission struct {
 }
 
 func (r Permission) Index(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	Permissions := &model.Permissions{}
+	mos := &model.Permissions{}
 	if req.NeedPaginate() {
-		paginator := req.Paginator(Permissions)
+		paginator := req.Paginator(mos)
 		if err := logic.Permission.Paginate(ctx, req, paginator); err != nil {
 			return nil, err
 		}
 		return responses.Success(paginator), nil
 	}
 
-	if err := logic.Permission.All(ctx, req, Permissions); err != nil {
+	if err := logic.Permission.All(ctx, req, mos); err != nil {
 		return nil, err
 	}
-	return responses.Success(Permissions), nil
+	return responses.Success(mos), nil
 }
 
 func (r Permission) Show(ctx context.Context, req requests.Request) (*responses.Response, error) {
 	mo := &model.Permission{}
 	mo.SetKey(req.ResourceID("permission"))
-	if err := logic.Permission.Show(ctx, req.GetWithResources(), mo); err != nil {
+	if err := logic.Permission.Show(ctx, req, mo); err != nil {
 		return nil, err
 	}
 	return responses.Success(mo), nil
@@ -62,7 +62,7 @@ func (r Permission) Create(ctx context.Context, req requests.Request) (*response
 }
 
 func (r Permission) Destroy(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	if err := logic.Permission.DestroyById(ctx, req.ResourceID("Permission")); err != nil {
+	if err := logic.Permission.DestroyById(ctx, req.ResourceID("permission")); err != nil {
 		return nil, err
 	}
 	return responses.NoContent(), nil

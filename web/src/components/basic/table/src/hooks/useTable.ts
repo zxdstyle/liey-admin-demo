@@ -3,19 +3,19 @@ import type { WatchStopHandle } from 'vue';
 import { getDynamicProps, DynamicProps } from '@/utils';
 import type { BasicTableProps, FetchParams, TableActionType } from '../types/table';
 
-type Props = Partial<DynamicProps<BasicTableProps>>;
+// type Props = Partial<DynamicProps<BasicTableProps<T>>>;
 
-type UseTableMethod = TableActionType;
+type UseTableMethod<T> = TableActionType<T>;
 
-export function useTable(
-  tableProps?: Props
-): [(instance: TableActionType, formInstance: UseTableMethod) => void, TableActionType] {
-  const tableRef = ref<Nullable<TableActionType>>(null);
+export function useTable<T>(
+  tableProps?: Partial<DynamicProps<BasicTableProps<T>>>
+): [(instance: TableActionType<T>, formInstance: UseTableMethod<T>) => void, TableActionType<T>] {
+  const tableRef = ref<Nullable<TableActionType<T>>>(null);
   const loadedRef = ref<Nullable<boolean>>(false);
 
   let stopWatch: WatchStopHandle;
 
-  function register(instance: TableActionType) {
+  function register(instance: TableActionType<T>) {
     onUnmounted(() => {
       tableRef.value = null;
       loadedRef.value = null;
@@ -41,21 +41,21 @@ export function useTable(
     );
   }
 
-  function getTableInstance(): TableActionType {
+  function getTableInstance(): TableActionType<T> {
     const table = unref(tableRef);
     if (!table) {
       console.error(
         'The table instance has not been obtained yet, please make sure the table is presented when performing the table operation!'
       );
     }
-    return table as TableActionType;
+    return table as TableActionType<T>;
   }
 
-  const methods: TableActionType = {
+  const methods: TableActionType<T> = {
     reload: async (opt?: FetchParams) => {
       await getTableInstance().reload(opt);
     },
-    setProps: (props: Partial<BasicTableProps>) => getTableInstance().setProps(props),
+    setProps: (props: Partial<BasicTableProps<T>>) => getTableInstance().setProps(props),
     setTableData: values => getTableInstance().setTableData(values),
     setRowData: (row, value) => getTableInstance().setRowData(row, value),
     setFieldData: (row, field, value) => getTableInstance().setFieldData(row, field, value)

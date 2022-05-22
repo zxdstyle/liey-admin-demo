@@ -9,6 +9,7 @@ import {
   REQUEST_TIMEOUT_MSG,
   ERROR_STATUS
 } from '@/config';
+import { useAuthStore } from '@/store';
 import { exeStrategyActions } from '../common';
 import { showErrorMsg } from './msg';
 
@@ -31,6 +32,14 @@ export function handleAxiosError(axiosError: AxiosError) {
       !window.navigator.onLine || axiosError.message === 'Network Error',
       () => {
         Object.assign(error, { code: NETWORK_ERROR_CODE, msg: NETWORK_ERROR_MSG });
+      }
+    ],
+    [
+      axiosError.response?.status === 401,
+      () => {
+        console.log(222);
+        const { resetAuthStore } = useAuthStore();
+        resetAuthStore();
       }
     ],
     [

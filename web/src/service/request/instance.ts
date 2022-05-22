@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AxiosRequestConfig, AxiosInstance, AxiosError } from 'axios';
 import { REFRESH_TOKEN_CODE } from '@/config';
+import { useAuthStore } from '@/store';
 import {
   getToken,
   transformRequestData,
@@ -85,6 +86,12 @@ export default class CustomAxiosInstance {
       },
       (axiosError: AxiosError) => {
         const error = handleAxiosError(axiosError);
+
+        if (axiosError.response?.status === 401) {
+          const { resetAuthStore } = useAuthStore();
+          resetAuthStore();
+        }
+
         return handleServiceResult(error, null);
       }
     );

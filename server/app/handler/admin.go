@@ -12,25 +12,25 @@ type Admin struct {
 }
 
 func (r Admin) Index(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	Admins := &model.Admins{}
+	mos := &model.Admins{}
 	if req.NeedPaginate() {
-		paginator := req.Paginator(Admins)
+		paginator := req.Paginator(mos)
 		if err := logic.Admin.Paginate(ctx, req, paginator); err != nil {
 			return nil, err
 		}
 		return responses.Success(paginator), nil
 	}
 
-	if err := logic.Admin.All(ctx, req, Admins); err != nil {
+	if err := logic.Admin.All(ctx, req, mos); err != nil {
 		return nil, err
 	}
-	return responses.Success(Admins), nil
+	return responses.Success(mos), nil
 }
 
 func (r Admin) Show(ctx context.Context, req requests.Request) (*responses.Response, error) {
 	mo := &model.Admin{}
 	mo.SetKey(req.ResourceID("admin"))
-	if err := logic.Admin.Show(ctx, req.GetWithResources(), mo); err != nil {
+	if err := logic.Admin.Show(ctx, req, mo); err != nil {
 		return nil, err
 	}
 	return responses.Success(mo), nil
@@ -62,7 +62,7 @@ func (r Admin) Create(ctx context.Context, req requests.Request) (*responses.Res
 }
 
 func (r Admin) Destroy(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	if err := logic.Admin.DestroyById(ctx, req.ResourceID("Admin")); err != nil {
+	if err := logic.Admin.DestroyById(ctx, req.ResourceID("admin")); err != nil {
 		return nil, err
 	}
 	return responses.NoContent(), nil

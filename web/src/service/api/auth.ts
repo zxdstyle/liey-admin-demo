@@ -1,12 +1,12 @@
 import { request, mockRequest } from '../request';
 
 export function loginByPwd(email: string, password: string) {
-  return request.post<ApiAuth.Token>('/v1/login', { email, password });
+  return request.post<ApiAuth.Token>('/api/v1/login', { email, password });
 }
 
 /** 获取用户信息 */
 export function fetchUserInfo() {
-  return request.get<ApiAuth.UserInfo>('/v1/userinfo');
+  return request.get<ApiAuth.UserInfo>('/api/v1/userinfo');
 }
 
 /**
@@ -33,7 +33,7 @@ export function fetchSmsCode(phone: string) {
  * @param password - 密码
  */
 export function fetchLogin(userName: string, password: string) {
-  return request.post<ApiAuth.Token>('/v1/login', { userName, password });
+  return request.post<ApiAuth.Token>('/api/v1/login', { userName, password });
 }
 
 /**

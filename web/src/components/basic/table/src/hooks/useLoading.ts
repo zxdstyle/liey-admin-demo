@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue';
 import { ref, unref, computed, watch } from 'vue';
 import type { BasicTableProps } from '../types/table';
 
-export function useLoading(props: ComputedRef<BasicTableProps>) {
+export function useLoading(props: ComputedRef<BasicTableProps<any>>) {
   const loadingRef = ref(unref(props).loading);
 
   watch(

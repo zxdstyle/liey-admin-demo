@@ -12,7 +12,7 @@ export function createViteProxy(isOpenProxy: boolean, envConfig: EnvConfig) {
     [envConfig.proxy]: {
       target: envConfig.url,
       changeOrigin: true,
-      rewrite: path => path.replace(new RegExp(`^${envConfig.proxy}`), '/api')
+      rewrite: path => path.replace(new RegExp(`^${envConfig.proxy}`), '/')
     }
   };
 

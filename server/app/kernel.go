@@ -2,6 +2,7 @@ package app
 
 import (
 	"github.com/zxdstyle/liey-admin-demo/app/jobs"
+	_ "github.com/zxdstyle/liey-admin-demo/database"
 	"github.com/zxdstyle/liey-admin/framework/plugins"
 	"github.com/zxdstyle/liey-admin/framework/queue/job"
 )

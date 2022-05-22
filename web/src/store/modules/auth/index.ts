@@ -1,6 +1,4 @@
-import { unref } from 'vue';
 import { defineStore } from 'pinia';
-import { router } from '@/router';
 import { useRouterPush } from '@/composables';
 import { fetchLogin, fetchUserInfo, loginByPwd } from '@/service';
 import { getUserInfo, getToken, setUserInfo, setToken, setRefreshToken, clearAuthStorage } from '@/utils';
@@ -34,7 +32,6 @@ export const useAuthStore = defineStore('auth-store', {
       const { toLogin } = useRouterPush(false);
       const { resetTabStore } = useTabStore();
       const { resetRouteStore } = useRouteStore();
-      const route = unref(router.currentRoute);
 
       clearAuthStorage();
       this.$reset();
@@ -42,9 +39,7 @@ export const useAuthStore = defineStore('auth-store', {
       resetTabStore();
       resetRouteStore();
 
-      if (route.meta.requiresAuth) {
-        toLogin();
-      }
+      toLogin();
     },
     /**
      * 处理登录后成功或失败的逻辑

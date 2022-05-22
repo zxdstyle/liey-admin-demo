@@ -13,7 +13,7 @@ export async function handleRefreshToken(axiosConfig: AxiosRequestConfig) {
   const { data } = await fetchUpdateToken(refreshToken);
   if (data) {
     setToken(data.token);
-    setRefreshToken(data.refreshToken);
+    setRefreshToken(data.token);
     const config = { ...axiosConfig };
     if (config.headers) {
       config.headers.Authorization = data.token;

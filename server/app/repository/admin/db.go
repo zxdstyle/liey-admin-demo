@@ -10,7 +10,7 @@ type dbRepository struct {
 	*bases.GormRepository
 }
 
-func NewDbRepository() Repository {
+func NewDbRepository() *dbRepository {
 	return &dbRepository{
 		GormRepository: bases.NewGormRepository(adm.DB().Model(model.Admin{})),
 	}

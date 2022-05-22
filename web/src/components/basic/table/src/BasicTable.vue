@@ -25,13 +25,13 @@ export default defineComponent({
     const tableElRef = ref(null);
     const tableData = ref<Recordable[]>([]);
 
-    const innerPropsRef = ref<Partial<BasicTableProps>>();
+    const innerPropsRef = ref<Partial<BasicTableProps<any>>>();
 
     const getProps = computed(() => {
-      return { ...props, ...unref(innerPropsRef) } as BasicTableProps;
+      return { ...props, ...unref(innerPropsRef) } as BasicTableProps<any>;
     });
 
-    function setProps(props: Partial<BasicTableProps>) {
+    function setProps(props: Partial<BasicTableProps<any>>) {
       innerPropsRef.value = { ...unref(innerPropsRef), ...props };
     }
 
@@ -76,7 +76,7 @@ export default defineComponent({
       return propsData;
     });
 
-    const tableAction: TableActionType = {
+    const tableAction: TableActionType<any> = {
       reload,
       setProps,
       setTableData,

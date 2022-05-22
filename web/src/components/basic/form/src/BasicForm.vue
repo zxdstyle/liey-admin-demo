@@ -1,5 +1,5 @@
 <template>
-  <n-form ref="formElRef" v-bind="getBindValue" :model="formModel">
+  <n-form ref="formElRef" v-bind="getBindValue">
     <n-row v-bind="getRow">
       <FormItem
         v-for="schema in getSchema"
@@ -51,7 +51,6 @@ export default defineComponent({
     const formModel = reactive<Recordable>({});
 
     const defaultValueRef = ref<Recordable>({});
-    // const isInitedDefaultRef = ref(false);
     const propsRef = ref<Partial<FormProps>>({});
     const schemaRef = ref<Nullable<FormSchema[]>>(null);
     const formElRef = ref<Nullable<FormActionType>>(null);
@@ -130,10 +129,11 @@ export default defineComponent({
       () => {
         const { model } = unref(getProps);
         if (!model) return;
-        setFieldsValue(model);
+        nextTick(() => setFieldsValue(model));
       },
       {
-        immediate: true
+        immediate: true,
+        deep: true
       }
     );
 

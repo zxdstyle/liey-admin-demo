@@ -5,7 +5,7 @@ import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from '@/components/basic/table/src/const
 import type { PaginationProps } from '../types/pagination';
 import type { BasicTableProps } from '../types/table';
 
-export function usePagination(refProps: ComputedRef<BasicTableProps>) {
+export function usePagination(refProps: ComputedRef<BasicTableProps<any>>) {
   const configRef = ref<PaginationProps>({});
   const show = ref(true);
 

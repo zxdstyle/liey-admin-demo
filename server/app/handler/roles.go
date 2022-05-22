@@ -12,53 +12,53 @@ type Role struct {
 }
 
 func (r Role) Index(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	roles := &model.Roles{}
+	mos := &model.Roles{}
 	if req.NeedPaginate() {
-		paginator := req.Paginator(roles)
+		paginator := req.Paginator(mos)
 		if err := logic.Role.Paginate(ctx, req, paginator); err != nil {
 			return nil, err
 		}
 		return responses.Success(paginator), nil
 	}
 
-	if err := logic.Role.All(ctx, req, roles); err != nil {
+	if err := logic.Role.All(ctx, req, mos); err != nil {
 		return nil, err
 	}
-	return responses.Success(roles), nil
+	return responses.Success(mos), nil
 }
 
 func (r Role) Show(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	role := &model.Role{}
-	role.SetKey(req.ResourceID("role"))
-	if err := logic.Role.Show(ctx, req.GetWithResources(), role); err != nil {
+	mo := &model.Role{}
+	mo.SetKey(req.ResourceID("role"))
+	if err := logic.Role.Show(ctx, req, mo); err != nil {
 		return nil, err
 	}
-	return responses.Success(role), nil
+	return responses.Success(mo), nil
 }
 
 func (r Role) Update(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	role := &model.Role{}
-	if err := req.Parse(role); err != nil {
+	mo := &model.Role{}
+	if err := req.Parse(mo); err != nil {
 		return nil, err
 	}
 
-	role.SetKey(req.ResourceID("role"))
-	if err := logic.Role.Update(ctx, role); err != nil {
+	mo.SetKey(req.ResourceID("role"))
+	if err := logic.Role.Update(ctx, mo); err != nil {
 		return nil, err
 	}
-	return responses.Success(role), nil
+	return responses.Success(mo), nil
 }
 
 func (r Role) Create(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	role := &model.Role{}
-	if err := req.Validate(role); err != nil {
+	mo := &model.Role{}
+	if err := req.Validate(mo); err != nil {
 		return nil, err
 	}
 
-	if err := logic.Role.Create(ctx, role); err != nil {
+	if err := logic.Role.Create(ctx, mo); err != nil {
 		return nil, err
 	}
-	return responses.Success(role), nil
+	return responses.Success(mo), nil
 }
 
 func (r Role) Destroy(ctx context.Context, req requests.Request) (*responses.Response, error) {

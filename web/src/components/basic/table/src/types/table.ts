@@ -1,4 +1,10 @@
-import type { DataTableBaseColumn, DataTableCreateSummary } from 'naive-ui';
+import type {
+  DataTableBaseColumn,
+  DataTableCreateSummary,
+  DropdownDividerOption,
+  DropdownRenderOption
+} from 'naive-ui';
+import { DropdownGroupOption, DropdownOption } from 'naive-ui';
 import type { CreateRowClassName, CreateRowKey, CreateRowProps } from 'naive-ui/es/data-table/src/interface';
 import type { PaginationProps } from '../types/pagination';
 
@@ -9,12 +15,12 @@ export interface FetchParams {
   filterInfo?: Recordable;
 }
 
-export interface BasicColumn extends DataTableBaseColumn {
+export interface BasicColumn<T> extends DataTableBaseColumn<T> {
   // 业务控制是否显示
-  ifShow?: boolean | ((column: BasicColumn) => boolean);
+  ifShow?: boolean | ((column: BasicColumn<T>) => boolean);
 }
 
-export interface BasicTableProps {
+export interface BasicTableProps<T> {
   api?: (...arg: any) => Promise<any>;
   data?: Recordable[];
 
@@ -94,16 +100,18 @@ export interface BasicTableProps {
   loading?: boolean;
 
   // 列配置
-  columns: BasicColumn[];
+  columns: BasicColumn<T>[];
 
   // 分页配置
   pagination?: PaginationProps | boolean;
 }
 
-export interface TableActionType {
-  setProps: (props: Partial<BasicTableProps>) => void;
+export interface TableActionType<T> {
+  setProps: (props: Partial<BasicTableProps<T>>) => void;
   reload: (opt?: FetchParams) => Promise<void>;
   setTableData: (values: Recordable[]) => void;
   setRowData: (row: number, value: Recordable) => void;
   setFieldData: (row: number, field: string, value: any) => void;
 }
+
+export type TableAction = Array<DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption>;

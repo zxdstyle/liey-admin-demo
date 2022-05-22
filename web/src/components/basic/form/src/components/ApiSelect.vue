@@ -24,7 +24,7 @@ export default defineComponent({
   name: 'ApiSelect',
   components: {},
   props: {
-    value: [Array, Object, String, Number],
+    value: [String, Number],
     api: {
       type: Function as PropType<(arg?: Recordable) => Promise<SelectOption[]>>,
       default: null
