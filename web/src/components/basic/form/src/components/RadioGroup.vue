@@ -1,5 +1,5 @@
 <template>
-  <n-radio-group v-model:value="state">
+  <n-radio-group>
     <n-radio v-for="item in getOptions" :key="`${item.value}`" :value="item.value" :disabled="item.disabled">
       {{ item.label }}
     </n-radio>

@@ -17,7 +17,7 @@ import { computed, h, reactive } from 'vue';
 import { NButton } from 'naive-ui';
 import { Icon } from '@iconify/vue';
 import { iconifyRender } from '@/utils';
-import { BasicTable, useTable, TableAction } from '@/components/basic/table';
+import { BasicTable, useTable, TableActionOption, TableAction } from '@/components/basic/table';
 import { BasicModal, useModal } from '@/components/basic/modal';
 import { ApiSwitch } from '@/components/basic/form';
 import ApiMenu from '@/service/api/scaffold/menu';
@@ -27,7 +27,7 @@ defineProps({});
 
 const [registerModal, { openModal, setModalProps, closeModal }] = useModal();
 
-const actions: TableAction = [
+const actions: TableActionOption = [
   { key: 'edit', label: '编辑', icon: iconifyRender('ep:edit', '', 18) },
   { type: 'divider' },
   {

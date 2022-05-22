@@ -37,35 +37,33 @@ export default function useFormEvent({ emit, getProps, formModel, getSchema, def
    */
   async function setFieldsValue(values: Recordable): Promise<void> {
     Object.keys(values).forEach(key => {
-      // const schema = unref(getSchema).find(item => item.field === key);
-      const value = values[key];
-      formModel[key] = value;
-      // const hasKey = Reflect.has(values, key);
-      //
-      // value = handleInputNumberValue(schema?.component, value);
-      // // 0| '' is allow
-      // if (hasKey) {
-      //   // time type
-      //   formModel[key] = value;
-      // if (itemIsDateType(key)) {
-      //   if (Array.isArray(value)) {
-      //     const arr: any[] = [];
-      //     for (const ele of value) {
-      //       arr.push(ele ? dayjs(ele) : null);
-      //     }
-      //     formModel[key] = arr;
-      //   } else {
-      //     const { componentProps } = schema || {};
-      //     let _props = componentProps as any;
-      //     if (typeof componentProps === 'function') {
-      //       _props = _props({ formModel });
-      //     }
-      //     formModel[key] = value ? (_props?.valueFormat ? value : dayjs(value)) : null;
-      //   }
-      // } else {
-      //   formModel[key] = value;
-      // }
-      // }
+      const schema = unref(getSchema).find(item => item.field === key);
+      let value = values[key];
+      const hasKey = Reflect.has(values, key);
+
+      value = handleInputNumberValue(schema?.component, value);
+      // 0| '' is allow
+      if (hasKey) {
+        // time type
+        if (itemIsDateType(key)) {
+          if (Array.isArray(value)) {
+            const arr: any[] = [];
+            for (const ele of value) {
+              arr.push(ele ? dayjs(ele) : null);
+            }
+            formModel[key] = arr;
+          } else {
+            const { componentProps } = schema || {};
+            let _props = componentProps as any;
+            if (typeof componentProps === 'function') {
+              _props = _props({ formModel });
+            }
+            formModel[key] = value ? (_props?.valueFormat ? value : dayjs(value)) : null;
+          }
+        } else {
+          formModel[key] = value;
+        }
+      }
     });
   }
 

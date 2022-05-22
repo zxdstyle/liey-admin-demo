@@ -6,10 +6,9 @@
   </n-radio-group>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import type { PropType } from 'vue';
 import { isString } from 'lodash-es';
-import { useRuleFormItem } from '@/hooks/core/useFormItem';
 
 type OptionsItem = { label: string; value: string | number; disabled?: boolean };
 type RadioItem = string | OptionsItem;
@@ -29,8 +28,8 @@ export default defineComponent({
   },
   setup(props) {
     // Embedded in the form, just use the hook binding to perform form verification
-    const [state] = useRuleFormItem(props);
-
+    // const [state] = useRuleFormItem(props);
+    const state = ref('');
     // Processing options value
     const getOptions = computed((): OptionsItem[] => {
       const { options } = props;

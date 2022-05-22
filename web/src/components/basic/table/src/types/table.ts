@@ -114,4 +114,6 @@ export interface TableActionType<T> {
   setFieldData: (row: number, field: string, value: any) => void;
 }
 
-export type TableAction = Array<DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption>;
+export type TableActionOption = Array<
+  DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption
+>;
