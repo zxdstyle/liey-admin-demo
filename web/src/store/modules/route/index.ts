@@ -67,7 +67,6 @@ export const useRouteStore = defineStore('route-store', {
       this.searchMenus = transformAuthRoutesToSearchMenus(routes);
 
       const vueRoutes = transformAuthRoutesToVueRoutes(routes);
-
       vueRoutes.forEach(route => {
         router.addRoute(route);
       });
@@ -92,7 +91,6 @@ export const useRouteStore = defineStore('route-store', {
     async initAuthRoute() {
       const { initHomeTab } = useTabStore();
       const { id } = getUserInfo();
-
       if (!id) return;
 
       const isDynamicRoute = this.authRouteMode === 'dynamic';
@@ -103,7 +101,6 @@ export const useRouteStore = defineStore('route-store', {
       }
 
       initHomeTab(this.routeHomeName, router);
-
       this.isInitAuthRoute = true;
     }
   }

@@ -38,9 +38,7 @@ export function transformAuthRoutesToSearchMenus(routes: AuthRoute.Route[], tree
 }
 
 /** 将路由名字转换成路由路径 */
-export function transformRouteNameToRoutePath(
-  name: Exclude<AuthRoute.RouteKey, 'not-found-page'>
-): AuthRoute.RoutePath {
+export function transformRouteNameToRoutePath(name: AuthRoute.RouteKey): AuthRoute.RoutePath {
   const rootPath: AuthRoute.RoutePath = '/';
   if (name === 'root') return rootPath;
 

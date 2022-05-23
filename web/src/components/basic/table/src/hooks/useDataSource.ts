@@ -1,10 +1,11 @@
 import type { ComputedRef, Ref } from 'vue';
 import { computed, onMounted, ref, unref, watch, watchEffect } from 'vue';
-import type { DataTableColumn, DataTableSortState, DataTableFilterState } from 'naive-ui';
 import { merge, isBoolean } from 'lodash-es';
 import { PAGE_SIZE } from '@/components/basic/table/src/const';
 import type { PaginationProps } from '../types/pagination';
 import type { BasicTableProps, FetchParams } from '../types/table';
+import useSorter from './useSorter';
+import useFilter from './useFilter';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -15,20 +16,11 @@ interface ActionType {
   tableData: Ref<Recordable[]>;
 }
 
-// interface SearchState {
-//   sortInfo: Recordable;
-//   filterInfo: Record<string, string[]>;
-// }
-
 export function useDataSource(
   propsRef: ComputedRef<BasicTableProps<any>>,
   { setLoading, tableData, setPagination, getPaginationInfo }: ActionType
 ) {
   const dataSourceRef = ref<Recordable[]>([]);
-  // const searchState = reactive<SearchState>({
-  //   sortInfo: {},
-  //   filterInfo: {}
-  // });
 
   watchEffect(() => {
     tableData.value = unref(dataSourceRef);
@@ -49,7 +41,10 @@ export function useDataSource(
     await fetch(opt);
   }
 
-  async function fetch(opt?: FetchParams) {
+  const { handleSorterChange } = useSorter(reload);
+  const { handleFilterChange } = useFilter(reload);
+
+  async function fetch(opt?: Recordable) {
     try {
       setLoading(true);
 
@@ -66,7 +61,7 @@ export function useDataSource(
         pageParams.pageSize = pageSize;
       }
 
-      const params: Recordable = merge(pageParams, {});
+      const params: Recordable = merge(pageParams, unref(opt));
       const { data, total } = await api(params);
 
       setPagination({ itemCount: total });
@@ -84,11 +79,6 @@ export function useDataSource(
     setTimeout(() => fetch(), 16);
   });
 
-  function handleSorterChange(options: DataTableSortState | DataTableSortState[] | null) {
-    console.log(options);
-    // todo
-  }
-
   async function handlePageSizeChange(pageSize: number) {
     setPagination({ pageSize });
     await reload();
@@ -97,10 +87,6 @@ export function useDataSource(
   async function handlePageChange(page: number) {
     setPagination({ page });
     await reload();
-  }
-
-  async function handleFilterChange(filters: DataTableFilterState, initiatorColumn: DataTableColumn) {
-    console.log(filters, initiatorColumn);
   }
 
   function setTableData<T = Recordable>(values: T[]) {

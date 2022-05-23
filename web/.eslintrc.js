@@ -149,6 +149,7 @@ module.exports = {
     'max-classes-per-file': 'off',
     'no-shadow': 'off',
     'no-unused-vars': 'off',
+    'no-useless-return': 'off',
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
     'no-use-before-define': 'off',

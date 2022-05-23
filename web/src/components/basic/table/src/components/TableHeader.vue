@@ -1,6 +1,8 @@
 <template>
   <div class="flex items-center justify-between pb-2 relative">
-    <div></div>
+    <div>
+      <slot name="left"></slot>
+    </div>
     <div class="flex items-center">
       <slot name="toolbar"></slot>
       <n-divider vertical />
@@ -38,7 +40,6 @@ export default defineComponent({
 
     const changeTableSize = () => {
       let { size } = unref(table.getBindValues);
-      console.log(size);
       switch (size) {
         case 'medium':
           size = 'large';

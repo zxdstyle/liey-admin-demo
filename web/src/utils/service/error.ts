@@ -37,7 +37,6 @@ export function handleAxiosError(axiosError: AxiosError) {
     [
       axiosError.response?.status === 401,
       () => {
-        console.log(222);
         const { resetAuthStore } = useAuthStore();
         resetAuthStore();
       }

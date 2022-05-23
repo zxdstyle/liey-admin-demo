@@ -1,9 +1,12 @@
 <template>
-  <div ref="wrapRef" class="h-full">
+  <div ref="wrapRef" class="h-full py-2 flex flex-col">
     <TableHeader>
+      <template #left><slot name="left"></slot></template>
       <template #toolbar><slot name="toolbar"></slot></template>
     </TableHeader>
-    <n-data-table ref="tableElRef" v-bind="getBindValues" :style="resizeStyle" />
+    <div class="h-full">
+      <n-data-table ref="tableElRef" v-bind="getBindValues" :style="resizeStyle" />
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,7 @@ export default defineComponent({
     const getBindValues = computed(() => {
       const data = unref(getDataSourceRef);
       const propsData: Recordable = {
+        rowKey: (row: Recordable) => row.id,
         pagination: toRaw(unref(getPaginationInfo)),
         loading: unref(getLoading),
         remote: true,
@@ -86,7 +90,7 @@ export default defineComponent({
 
     const resizeStyle = computed(() => {
       if (unref(getBindValues).flexHeight) {
-        return { height: 'calc(100% - 20px)' };
+        return { height: '100%' };
       }
       return {};
     });
@@ -99,3 +103,5 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="less" scoped></style>

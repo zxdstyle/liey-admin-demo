@@ -1,6 +1,7 @@
 <template>
   <n-card class="rounded-xl h-full">
     <BasicTable @register="registerTable">
+      <template #left></template>
       <template #toolbar>
         <n-button type="primary" @click="openCreateModal"><Icon icon="ph:plus-bold"></Icon>新增菜单</n-button>
       </template>
@@ -39,12 +40,21 @@ const actions: TableActionOption = [
 ];
 
 const [registerTable, { reload }] = useTable<Api.Menu>({
-  api: ApiMenu.Index,
+  api: ApiMenu.TreeData,
   columns: [
-    { key: 'id', title: 'ID' },
+    { type: 'selection' },
+    { key: 'id', title: 'ID', sorter: { multiple: 2 } },
     { key: 'title', title: '菜单名称' },
     { key: 'name', title: '菜单唯一标识' },
-    { key: 'path', title: '菜单路径' },
+    {
+      key: 'path',
+      title: '菜单路径',
+      filter: 'default',
+      filterOptions: [
+        { value: 'true', label: '显示' },
+        { value: 'false', label: '隐藏' }
+      ]
+    },
     {
       key: 'hidden',
       title: '是否显示到菜单',
@@ -56,9 +66,14 @@ const [registerTable, { reload }] = useTable<Api.Menu>({
             field="hidden"
           ></ApiSwitch>
         );
-      }
+      },
+      filter: 'default',
+      filterOptions: [
+        { value: 'true', label: '显示' },
+        { value: 'false', label: '隐藏' }
+      ]
     },
-    { key: 'sort_num', title: '排序值' },
+    { key: 'sort_num', title: '排序值', sorter: { multiple: 1 } },
     {
       key: 'icon',
       title: '图标',
@@ -86,7 +101,8 @@ const [registerTable, { reload }] = useTable<Api.Menu>({
         return <TableAction actions={actions} onSelect={(key: string) => handleTableAction(key, row)} />;
       }
     }
-  ]
+  ],
+  pagination: false
 });
 
 const state = reactive({

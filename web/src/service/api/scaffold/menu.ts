@@ -4,8 +4,8 @@ import Resource from '@/service/api/base/resource';
 class Menu extends Resource {
   resource = 'menus';
 
-  TreeData = () => {
-    return request.get(`/api/${this.version}/tree-menus`);
+  TreeData = (params = {}) => {
+    return request.get(`/api/${this.version}/tree-menus`, { params });
   };
 }
 

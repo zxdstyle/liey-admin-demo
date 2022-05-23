@@ -3,9 +3,9 @@ import vue from './vue';
 import html from './html';
 import unplugin from './unplugin';
 import unocss from './unocss';
-import mock from './mock';
 import visualizer from './visualizer';
 import compress from './compress';
+import mock from './mock';
 
 /**
  * vite插件

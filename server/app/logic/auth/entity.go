@@ -1,5 +1,7 @@
 package auth
 
+import "github.com/zxdstyle/liey-admin-demo/app/enums"
+
 type (
 	LoginByPwd struct {
 		Email    *string `json:"email" v:"required,email"`
@@ -10,5 +12,29 @@ type (
 		Email  *string `json:"email"`
 		Token  *string `json:"token"`
 		Avatar *string `json:"avatar"`
+	}
+
+	UserRouteResp struct {
+		Home   *string       `json:"home"`
+		Routes *[]*UserRoute `json:"routes"`
+	}
+
+	RouteMeta struct {
+		Title        *string `json:"title"`
+		RequiresAuth *bool   `json:"requiresAuth"`
+		KeepAlive    *bool   `json:"keepAlive"`
+		Icon         *string `json:"icon"`
+		Hide         *bool   `json:"hidden"`
+		Href         *string `json:"href,omitempty"`
+	}
+
+	UserRoute struct {
+		ID        uint                  `json:"-"`
+		ParentId  *uint                 `json:"parent-id"`
+		Name      *string               `json:"name"`
+		Path      *string               `json:"path"`
+		Component *enums.RouteComponent `json:"component,omitempty"`
+		Meta      *RouteMeta            `json:"meta"`
+		Children  *[]*UserRoute         `json:"children,omitempty"`
 	}
 )

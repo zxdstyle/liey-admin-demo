@@ -23,7 +23,7 @@ export async function setupRouter(app: App) {
 /** 路由名称 */
 export const routeName = (key: AuthRoute.RouteKey) => key;
 /** 路由路径 */
-export const routePath = (key: Exclude<AuthRoute.RouteKey, 'not-found-page'>) => transformRouteNameToRoutePath(key);
+export const routePath = (key: AuthRoute.RouteKey) => transformRouteNameToRoutePath(key);
 
 export * from './routes';
 export * from './modules';

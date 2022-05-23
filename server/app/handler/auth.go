@@ -34,3 +34,11 @@ func (apiAuth) Userinfo(ctx context.Context, req requests.Request) (*responses.R
 	}
 	return responses.Success(resp), nil
 }
+
+func (apiAuth) UserRoutes(ctx context.Context, req requests.Request) (*responses.Response, error) {
+	var resp auth.UserRouteResp
+	if err := logic.Auth.UserRoutes(ctx, req, &resp); err != nil {
+		return nil, err
+	}
+	return responses.Success(resp), nil
+}
