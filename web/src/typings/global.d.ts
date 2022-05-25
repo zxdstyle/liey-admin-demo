@@ -23,3 +23,13 @@ declare type EmitType = (event: 'register', ...args: any[]) => void;
 declare interface Fn<T = any, R = T> {
   (...arg: T[]): R;
 }
+
+declare type TargetContext = '_self' | '_blank';
+
+declare interface ComponentElRef<T extends HTMLElement = HTMLDivElement> {
+  $el: T;
+}
+
+declare type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElRef<T> | null;
+
+declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;

@@ -101,11 +101,15 @@ export const useAuthStore = defineStore('auth-store', {
      */
     async login(email: string, password: string) {
       this.loginLoading = true;
-      const { data } = await loginByPwd(email, password);
-      if (data) {
-        await this.handleActionAfterLogin(data);
+      try {
+        const { data } = await loginByPwd(email, password);
+        if (data) {
+          await this.handleActionAfterLogin(data);
+        }
+        this.loginLoading = false;
+      } catch (Exception) {
+        this.loginLoading = false;
       }
-      this.loginLoading = false;
     },
     /**
      * 更换用户权限(切换账号)

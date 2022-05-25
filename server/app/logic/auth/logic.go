@@ -107,6 +107,7 @@ func (Logic) transformToRoute(menu model.Menu) *UserRoute {
 			Icon:         menu.Icon,
 			Hide:         menu.Hidden,
 			//Href:         menu.Path,
+			Order: menu.SortNum,
 		},
 		Children: nil,
 	}

@@ -24,8 +24,9 @@ type (
 		RequiresAuth *bool   `json:"requiresAuth"`
 		KeepAlive    *bool   `json:"keepAlive"`
 		Icon         *string `json:"icon"`
-		Hide         *bool   `json:"hidden"`
+		Hide         *bool   `json:"hide"`
 		Href         *string `json:"href,omitempty"`
+		Order        *int    `json:"order,omitempty"`
 	}
 
 	UserRoute struct {

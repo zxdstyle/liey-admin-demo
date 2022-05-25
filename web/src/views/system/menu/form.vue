@@ -15,6 +15,16 @@ const props = defineProps({
 
 const emit = defineEmits(['submit']);
 
+const formatTreeData = (data: Api.Menu[]): Api.Menu[] => {
+  return [
+    {
+      id: 0,
+      title: '顶级菜单',
+      children: data
+    }
+  ];
+};
+
 const [registerForm, { resetFields }] = useForm({
   model: props.model,
   rowProps: {
@@ -29,7 +39,8 @@ const [registerForm, { resetFields }] = useForm({
       componentProps: {
         api: ApiMenu.TreeData,
         keyField: 'id',
-        labelField: 'title'
+        labelField: 'title',
+        afterFetch: formatTreeData
       }
     },
     { field: 'title', label: '菜单名称', component: 'Input', span: 14 },

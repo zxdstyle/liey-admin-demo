@@ -14,7 +14,7 @@ type (
 		Email      *string     `json:"email,omitempty" gorm:"not null;type:varchar(64);unique:uniq_email;comment:邮箱" v:"required,unique-db=admins"`
 		Password   *string     `json:"-" gorm:"not null;comment:密码"`
 		Avatar     *string     `json:"avatar,omitempty" gorm:"not null;default:'';comment:头像"`
-		IsActive   *bool       `json:"is_active,omitempty" gorm:"not null;type:tinyint;default:1;comment:状态 0：禁用 1：启用"`
+		IsActive   *uint8      `json:"is_active,omitempty" gorm:"not null;type:tinyint;default:1;comment:状态 0：禁用 1：启用"`
 		RegisterAt *gtime.Time `json:"register_at,omitempty" gorm:"comment:用户注册时间"`
 	}
 

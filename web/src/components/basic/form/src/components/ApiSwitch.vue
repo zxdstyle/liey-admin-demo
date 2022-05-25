@@ -23,7 +23,7 @@ const props = defineProps({
     default: 'status'
   },
   value: {
-    type: Boolean,
+    type: [Boolean, Number],
     default: false
   },
   round: {

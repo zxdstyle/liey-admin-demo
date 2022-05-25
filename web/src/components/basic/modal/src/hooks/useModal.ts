@@ -1,7 +1,9 @@
-import { ref, toRaw, unref, reactive, onUnmounted, getCurrentInstance, computed } from 'vue';
+import { ref, toRaw, unref, reactive, onUnmounted, getCurrentInstance, computed, watchEffect, nextTick } from 'vue';
 import type { ModalProps } from 'naive-ui';
-import { isEqual } from 'lodash-es';
-import type { UseModalReturnType, ModalMethods, ReturnMethods } from '../typing';
+import { isEqual, isFunction } from 'lodash-es';
+import { tryOnUnmounted } from '@vueuse/core';
+import { isProdMode } from '@/utils/common/env';
+import type { UseModalReturnType, ModalMethods, ReturnMethods, UseModalInnerReturnType } from '../typing';
 
 const dataTransfer = reactive<any>({});
 
@@ -81,3 +83,62 @@ export function useModal(): UseModalReturnType {
 
   return [register, methods];
 }
+
+export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
+  const modalInstanceRef = ref<Nullable<ModalMethods>>(null);
+  const currentInstance = getCurrentInstance();
+  const uidRef = ref<string>('');
+
+  const getInstance = () => {
+    const instance = unref(modalInstanceRef);
+    if (!instance) {
+      import.meta.env.PROD;
+      console.error('useModalInner instance is undefined!');
+    }
+    return instance;
+  };
+
+  const register = (modalInstance: ModalMethods, uuid: string) => {
+    isProdMode() &&
+      tryOnUnmounted(() => {
+        modalInstanceRef.value = null;
+      });
+    uidRef.value = uuid;
+    modalInstanceRef.value = modalInstance;
+    currentInstance?.emit('register', modalInstance, uuid);
+  };
+
+  watchEffect(() => {
+    const data = dataTransfer[unref(uidRef)];
+    if (!data) return;
+    if (!callbackFn || !isFunction(callbackFn)) return;
+    nextTick(() => {
+      callbackFn(data);
+    });
+  });
+
+  return [
+    register,
+    {
+      changeLoading: (loading = true) => {
+        getInstance()?.setModalProps({ loading });
+      },
+      getVisible: computed((): boolean => {
+        return visibleData[~~unref(uidRef)];
+      }),
+
+      closeModal: () => {
+        getInstance()?.setModalProps({ show: false });
+      },
+
+      setModalProps: (props: Partial<ModalProps>) => {
+        getInstance()?.setModalProps(props);
+      },
+
+      redoModalHeight: () => {
+        const callRedo = getInstance()?.redoModalHeight;
+        callRedo && callRedo();
+      }
+    }
+  ];
+};

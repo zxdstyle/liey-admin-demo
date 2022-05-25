@@ -25,10 +25,9 @@ const attrs = useAttrs();
 
 const bindValue = computed(() => {
   return {
-    // trigger: 'click',
-    ...attrs,
     options: props.actions,
-    onSelect: (key: string) => emit('select', key)
+    onSelect: (key: string) => emit('select', key),
+    ...attrs
   };
 });
 </script>

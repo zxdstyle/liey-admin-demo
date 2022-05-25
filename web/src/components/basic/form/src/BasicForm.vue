@@ -1,5 +1,5 @@
 <template>
-  <n-form ref="formElRef" v-bind="getBindValue">
+  <n-form ref="formElRef" v-bind="getBindValue" :model="formModel">
     <n-row v-bind="getRow">
       <FormItem
         v-for="schema in getSchema"

@@ -15,7 +15,7 @@
 
 <script lang="tsx" setup>
 import { computed, h, reactive } from 'vue';
-import { NButton } from 'naive-ui';
+import { NButton, useDialog } from 'naive-ui';
 import { Icon } from '@iconify/vue';
 import { iconifyRender } from '@/utils';
 import { BasicTable, useTable, TableActionOption, TableAction } from '@/components/basic/table';
@@ -24,8 +24,7 @@ import { ApiSwitch } from '@/components/basic/form';
 import ApiMenu from '@/service/api/scaffold/menu';
 import MenuForm from './form.vue';
 
-defineProps({});
-
+const dialog = useDialog();
 const [registerModal, { openModal, setModalProps, closeModal }] = useModal();
 
 const actions: TableActionOption = [
@@ -46,18 +45,10 @@ const [registerTable, { reload }] = useTable<Api.Menu>({
     { key: 'id', title: 'ID', sorter: { multiple: 2 } },
     { key: 'title', title: '菜单名称' },
     { key: 'name', title: '菜单唯一标识' },
-    {
-      key: 'path',
-      title: '菜单路径',
-      filter: 'default',
-      filterOptions: [
-        { value: 'true', label: '显示' },
-        { value: 'false', label: '隐藏' }
-      ]
-    },
+    { key: 'path', title: '菜单路径' },
     {
       key: 'hidden',
-      title: '是否显示到菜单',
+      title: '是否隐藏',
       render(row) {
         return (
           <ApiSwitch
@@ -66,12 +57,7 @@ const [registerTable, { reload }] = useTable<Api.Menu>({
             field="hidden"
           ></ApiSwitch>
         );
-      },
-      filter: 'default',
-      filterOptions: [
-        { value: 'true', label: '显示' },
-        { value: 'false', label: '隐藏' }
-      ]
+      }
     },
     { key: 'sort_num', title: '排序值', sorter: { multiple: 1 } },
     {
@@ -114,19 +100,29 @@ const openEditModal = () => {
   openModal();
 };
 
-function handleTableAction(key: string, row: Api.Menu) {
+const handleDeleteAdmin = async (row: Api.Admin) => {
+  await ApiMenu.Destroy(row.id);
+};
+
+function handleTableAction(key: string, row: Api.Admin) {
   switch (key) {
     case 'edit':
       state.model = row;
       openEditModal();
       break;
     case 'delete':
+      dialog.warning({
+        title: '警告',
+        content: '是否确认删除该管理员？',
+        onPositiveClick: () => handleDeleteAdmin(row)
+      });
       break;
     default:
   }
 }
 
 const openCreateModal = () => {
+  state.model = {};
   openModal();
   setModalProps({ title: '新增菜单' });
 };
@@ -140,8 +136,6 @@ const getFormBind = computed(() => {
     }
   };
 });
-
-// onMounted(() => openCreateModal());
 </script>
 
 <style lang="less" scoped></style>

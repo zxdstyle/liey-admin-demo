@@ -31,6 +31,8 @@ export interface TableActionType<T> {
   setFieldData: (row: number, field: string, value: any) => void;
 }
 
+export type TableActionHandler<T> = (action: string, row: T) => void;
+
 export type TableActionOption = Array<
   DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption
 >;
