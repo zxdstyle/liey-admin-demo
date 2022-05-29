@@ -20,7 +20,7 @@ func (r Menu) Index(ctx context.Context, req requests.Request) (*responses.Respo
 		if err := logic.Menu.Paginate(ctx, req, paginator); err != nil {
 			return nil, err
 		}
-		return responses.Success(paginator), nil
+		return responses.Success(paginator.Data).WithMeta(paginator.Meta), nil
 	}
 
 	if err := logic.Menu.All(ctx, req, mos); err != nil {

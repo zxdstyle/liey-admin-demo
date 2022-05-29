@@ -213,4 +213,6 @@ export interface FormSchema {
   dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
 
   dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];
+
+  onChange?: (renderCallbackParams: RenderCallbackParams) => void;
 }

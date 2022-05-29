@@ -19,29 +19,18 @@ func NewLogic() *Logic {
 }
 
 func (*Logic) TreeData(ctx context.Context, req requests.Request, menus *model.Menus) error {
-	if err := repository.Menu.All(ctx, req, menus); err != nil {
+	return repository.Menu.TreeData(ctx, menus)
+}
+
+func (l *Logic) Destroy(ctx context.Context, mo bases.RepositoryModel) error {
+	var children model.Menus
+	if err := repository.Menu.GetChildren(ctx, mo.GetKey(), &children); err != nil {
 		return err
 	}
 
-	refer := make(map[uint]*model.Menu, 0)
-	tree := make([]*model.Menu, 0)
-	for idx, menu := range *menus {
-		refer[menu.ID] = (*menus)[idx]
+	if err := l.BaseLogic.Destroy(ctx, mo); err != nil {
+		return err
 	}
 
-	for idx, menu := range *menus {
-		pid := *menu.ParentId
-		if pid == 0 {
-			tree = append(tree, (*menus)[idx])
-		} else {
-			if _, ok := refer[pid]; ok {
-				if refer[pid].Children == nil {
-					refer[pid].Children = &model.Menus{}
-				}
-				*refer[pid].Children = append(*refer[pid].Children, (*menus)[idx])
-			}
-		}
-	}
-	*menus = tree
-	return nil
+	return repository.Menu.BatchDestroy(ctx, children)
 }

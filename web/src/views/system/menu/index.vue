@@ -14,7 +14,7 @@
 </template>
 
 <script lang="tsx" setup>
-import { computed, h, reactive } from 'vue';
+import { computed, h, onActivated, reactive } from 'vue';
 import { NButton, useDialog } from 'naive-ui';
 import { Icon } from '@iconify/vue';
 import { iconifyRender } from '@/utils';
@@ -22,6 +22,7 @@ import { BasicTable, useTable, TableActionOption, TableAction } from '@/componen
 import { BasicModal, useModal } from '@/components/basic/modal';
 import { ApiSwitch } from '@/components/basic/form';
 import ApiMenu from '@/service/api/scaffold/menu';
+import useBasicDialog from '@/hooks/common/useDialog';
 import MenuForm from './form.vue';
 
 const dialog = useDialog();
@@ -38,6 +39,7 @@ const actions: TableActionOption = [
   }
 ];
 
+const { warning } = useBasicDialog();
 const [registerTable, { reload }] = useTable<Api.Menu>({
   api: ApiMenu.TreeData,
   columns: [
@@ -88,7 +90,8 @@ const [registerTable, { reload }] = useTable<Api.Menu>({
       }
     }
   ],
-  pagination: false
+  pagination: false,
+  searchInfo: { 'order.sort_num': 'desc', 'order.id': 'desc' }
 });
 
 const state = reactive({
@@ -100,22 +103,18 @@ const openEditModal = () => {
   openModal();
 };
 
-const handleDeleteAdmin = async (row: Api.Admin) => {
+const handleDeleteAdmin = async (row: Api.Menu) => {
   await ApiMenu.Destroy(row.id);
 };
 
-function handleTableAction(key: string, row: Api.Admin) {
+function handleTableAction(key: string, row: Api.Menu) {
   switch (key) {
     case 'edit':
       state.model = row;
       openEditModal();
       break;
     case 'delete':
-      dialog.warning({
-        title: '警告',
-        content: '是否确认删除该管理员？',
-        onPositiveClick: () => handleDeleteAdmin(row)
-      });
+      warning('子菜单将被一起删除，是否确认删除该菜单？', () => handleDeleteAdmin(row));
       break;
     default:
   }
@@ -136,6 +135,8 @@ const getFormBind = computed(() => {
     }
   };
 });
+
+onActivated(() => reload());
 </script>
 
 <style lang="less" scoped></style>

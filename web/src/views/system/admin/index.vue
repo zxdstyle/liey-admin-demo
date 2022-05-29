@@ -18,9 +18,11 @@ import { Icon } from '@iconify/vue';
 import { TableActionHandler } from '@/components/basic/table';
 import ApiAdmin from '@/service/api/scaffold/admin';
 import { useModal } from '@/components/basic/modal';
+import useBasicDialog from '@/hooks/common/useDialog';
 import AdminForm from './form.vue';
 import { useIndex } from './hooks';
 
+const { warning } = useBasicDialog();
 const [registerModal, { openModal, setModalProps, closeModal }] = useModal();
 
 const state = reactive({
@@ -45,13 +47,18 @@ const actionHandler: TableActionHandler<Api.Admin> = async (action, row) => {
       openEditModal(row);
       break;
     case 'delete':
-      await ApiAdmin.Destroy(row.id);
+      warning('是否确定删除该管理员？', () => handleDelete(row.id));
       break;
     default:
   }
 };
 
 const { registerTable, reload } = useIndex(actionHandler);
+
+async function handleDelete(key: number) {
+  await ApiAdmin.Destroy(key);
+  await reload();
+}
 
 const getFormBind = computed(() => {
   return {

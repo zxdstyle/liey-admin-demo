@@ -18,9 +18,15 @@ export interface BasicTableColumn<T> extends TableBaseColumn<T> {
 }
 
 export interface BasicTableProps<T> extends DataTableProps {
-  api?: (...arg: any) => Promise<any>;
+  api?: (...arg: any) => Promise<ApiResponse>;
   // 列配置
   columns: BasicColumn<T>[];
+
+  // 额外的请求参数
+  searchInfo?: Recordable;
+
+  // 是否立即请求远程数据
+  immediate?: boolean;
 }
 
 export interface TableActionType<T> {

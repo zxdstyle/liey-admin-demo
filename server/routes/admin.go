@@ -17,6 +17,8 @@ func init() {
 		v1.Middleware(middleware.Authenticate("api"))
 		v1.GET("userinfo", handler.Auth.Userinfo)
 		v1.GET("user-routes", handler.Auth.UserRoutes)
+		v1.Resource("roles", handler.Role{})
+		v1.Resource("permissions", handler.Permission{})
 		v1.Resource("menus", handler.ApiMenu)
 		v1.GET("tree-menus", handler.ApiMenu.TreeData)
 	})

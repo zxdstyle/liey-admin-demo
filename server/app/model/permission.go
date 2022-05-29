@@ -30,3 +30,7 @@ func (r Permissions) GetModel(i int) bases.RepositoryModel {
 	}
 	return r[i]
 }
+
+func (r Permissions) Len() int {
+	return len(r)
+}

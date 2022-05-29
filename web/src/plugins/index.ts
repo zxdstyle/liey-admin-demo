@@ -1,3 +1,9 @@
+import { App } from 'vue';
 import setupAssets from './assets';
+import setupVexTable from './vex-table';
 
-export { setupAssets };
+function setupPlugins(app: App) {
+  setupVexTable(app);
+}
+
+export { setupAssets, setupPlugins };

@@ -40,7 +40,7 @@ export default defineComponent({
     const getMergeProps = computed(() => {
       return {
         preset: 'card',
-        style: 'width: 760px;min-height: 420px',
+        style: 'width: 760px',
         trapFocus: true,
         ...props,
         ...(unref(propsRef) as any)

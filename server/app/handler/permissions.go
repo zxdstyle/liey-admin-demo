@@ -18,7 +18,7 @@ func (r Permission) Index(ctx context.Context, req requests.Request) (*responses
 		if err := logic.Permission.Paginate(ctx, req, paginator); err != nil {
 			return nil, err
 		}
-		return responses.Success(paginator), nil
+		return responses.Success(paginator.Data).WithMeta(paginator.Meta), nil
 	}
 
 	if err := logic.Permission.All(ctx, req, mos); err != nil {

@@ -45,7 +45,8 @@ export default function useIndex(actionHandler: TableActionHandler<Api.Admin>) {
           return <TableAction actions={actions} onSelect={(key: string) => handleAction(key, row)} />;
         }
       }
-    ]
+    ],
+    immediate: true
   });
 
   async function handleAction(key: string, row: Api.Admin) {

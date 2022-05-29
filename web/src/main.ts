@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { setupAssets } from './plugins';
+import { setupAssets, setupPlugins } from './plugins';
 import { setupStore } from './store';
 import { setupDirectives } from './directives';
 import { setupRouter } from './router';
@@ -10,6 +10,8 @@ async function setupApp() {
   setupAssets();
 
   const app = createApp(App);
+
+  setupPlugins(app);
 
   // store plugin: pinia
   setupStore(app);

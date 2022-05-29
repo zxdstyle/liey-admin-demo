@@ -1,6 +1,6 @@
 import Resource from '@/service/api/base/resource';
 
-class Admin extends Resource {
+class Admin extends Resource<Api.Admin> {
   resource = 'admins';
 }
 

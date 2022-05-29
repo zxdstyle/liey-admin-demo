@@ -1,24 +1,24 @@
 import { request } from '@/service/request';
 
-export default class Resource {
+export default class Resource<T> {
   resource = '';
 
   version = 'v1';
 
-  Index = () => {
-    return request.get(`/api/${this.version}/${this.resource}`);
+  Index = (params = {}) => {
+    return request.get<T[]>(`/api/${this.version}/${this.resource}`, { params });
   };
 
   Show = (id: number) => {
-    return request.get(`/api/${this.version}/${this.resource}/${id}`);
+    return request.get<T>(`/api/${this.version}/${this.resource}/${id}`);
   };
 
   Update = (id: number, data = {}) => {
-    return request.put(`/api/${this.version}/${this.resource}/${id}`, data);
+    return request.put<T>(`/api/${this.version}/${this.resource}/${id}`, data);
   };
 
   Create = (data: any) => {
-    return request.post(`/api/${this.version}/${this.resource}`, data);
+    return request.post<T>(`/api/${this.version}/${this.resource}`, data);
   };
 
   Destroy = (id: number) => {

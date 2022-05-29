@@ -55,46 +55,20 @@ func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, 
 
 func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserRouteResp) error {
 	var menus model.Menus
-	if err := repository.Menu.All(ctx, req, &menus); err != nil {
+	if err := repository.Menu.TreeData(ctx, &menus); err != nil {
 		return err
 	}
-
-	var userRoutes []*UserRoute
-	for _, menu := range menus {
-		userRoutes = append(userRoutes, l.transformToRoute(*menu))
-		if menu.IsDefault != nil && *menu.IsDefault {
-			resp.Home = menu.Name
-		}
+	if menus == nil {
+		return nil
 	}
 
-	refer := make(map[uint]*UserRoute, 0)
-	tree := make([]*UserRoute, 0)
-	for idx, route := range userRoutes {
-		refer[route.ID] = userRoutes[idx]
-	}
-
-	for idx, route := range userRoutes {
-		pid := *route.ParentId
-		if pid == 0 {
-			tree = append(tree, userRoutes[idx])
-		} else {
-			if _, ok := refer[pid]; ok {
-				if refer[pid].Children == nil {
-					ur := make([]*UserRoute, 0)
-					refer[pid].Children = &ur
-				}
-
-				*refer[pid].Children = append(*refer[pid].Children, userRoutes[idx])
-			}
-		}
-	}
-	l.resolveComponent(&tree)
-	resp.Routes = &tree
+	resp.Routes = l.resolveComponent(&menus)
 	return nil
 }
 
-func (Logic) transformToRoute(menu model.Menu) *UserRoute {
-	return &UserRoute{
+// 菜单转换为路由格式
+func (Logic) transformToRoute(menu model.Menu) UserRoute {
+	return UserRoute{
 		ID:        menu.ID,
 		Name:      menu.Name,
 		Path:      menu.Path,
@@ -113,17 +87,19 @@ func (Logic) transformToRoute(menu model.Menu) *UserRoute {
 	}
 }
 
-func (l Logic) resolveComponent(routes *[]*UserRoute) {
-	if routes == nil {
-		return
-	}
-
-	for idx, route := range *routes {
-		if route.Children == nil {
-			(*routes)[idx].Component = &enums.RouteComponentSelf
-		} else if route.ParentId != nil && *route.ParentId != 0 {
-			(*routes)[idx].Component = &enums.RouteComponentMulti
+func (l Logic) resolveComponent(menus *model.Menus) *[]*UserRoute {
+	var routes []*UserRoute
+	for idx, menu := range *menus {
+		route := l.transformToRoute(*(*menus)[idx])
+		if menu.Children == nil {
+			route.Component = &enums.RouteComponentSelf
+		} else if menu.ParentId != nil && *menu.ParentId != 0 {
+			route.Component = &enums.RouteComponentMulti
+			route.Children = l.resolveComponent((*menus)[idx].Children)
+		} else {
+			route.Children = l.resolveComponent((*menus)[idx].Children)
 		}
-		l.resolveComponent((*routes)[idx].Children)
+		routes = append(routes, &route)
 	}
+	return &routes
 }

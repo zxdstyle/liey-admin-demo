@@ -7,7 +7,7 @@
     negative-text="取消"
     positive-text="确认上传"
     @register="register"
-    @onPositiveClick="handleOk"
+    @positive-click="handleOk"
   >
     <div class="flex">
       <div class="w-1/2 h-340px">
@@ -158,7 +158,8 @@ type apiFunParams = { file: Blob; name: string; filename: string };
 const props = defineProps({
   circled: { type: Boolean, default: true },
   uploadApi: {
-    type: Function as PropType<(params: apiFunParams) => Promise<any>>
+    type: Function as PropType<(params: apiFunParams) => Promise<any>>,
+    required: true
   }
 });
 
@@ -209,17 +210,15 @@ function handlerToolbar(event: string, arg?: number) {
 async function handleOk() {
   if (!unref(previewSource)) return;
   const { uploadApi } = props;
-  if (uploadApi && isFunction(uploadApi)) {
-    const blob = dataURLtoBlob(previewSource.value);
-    // try {
-    //   setModalProps({ confirmLoading: true });
-    const result = await uploadApi({ name: 'file', file: blob, filename });
-    emit('uploadSuccess', { source: previewSource.value, data: result.data });
-    closeModal();
-    // } finally {
-    //   setModalProps({ confirmLoading: false });
-    // }
+  if (!uploadApi || !isFunction(uploadApi)) {
+    return Promise.reject(new Error('missing upload api'));
   }
+
+  const blob = dataURLtoBlob(previewSource.value);
+  const result = await uploadApi({ name: 'file', file: blob, filename });
+  emit('uploadSuccess', { source: previewSource.value, data: result.data });
+  closeModal();
+  console.log(222);
 }
 
 const previewSizes = ['32px', '48px', '64px', '80px'];

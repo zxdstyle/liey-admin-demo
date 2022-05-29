@@ -50,7 +50,7 @@ export function useDataSource(
 
       let pageParams: Recordable = {};
 
-      const { api, pagination } = unref(propsRef);
+      const { api, pagination, searchInfo } = unref(propsRef);
       if (!api) return;
 
       const { page = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
@@ -61,10 +61,13 @@ export function useDataSource(
         pageParams.pageSize = pageSize;
       }
 
-      const params: Recordable = merge(pageParams, unref(opt));
-      const { data, total } = await api(params);
+      const params: Recordable = merge(searchInfo, pageParams, unref(opt));
 
-      setPagination({ itemCount: total });
+      const { data, meta } = await api(params);
+      if (!isBoolean(pagination) || pagination) {
+        setPagination({ itemCount: meta.pagination?.total });
+      }
+
       dataSourceRef.value = data;
     } finally {
       setLoading(false);
@@ -76,7 +79,7 @@ export function useDataSource(
   });
 
   onMounted(() => {
-    setTimeout(() => fetch(), 16);
+    unref(propsRef).immediate && fetch();
   });
 
   async function handlePageSizeChange(pageSize: number) {

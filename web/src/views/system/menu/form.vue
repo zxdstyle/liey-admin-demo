@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts" setup>
+import { transformRouteNameToRoutePath } from '@/utils';
 import ApiMenu from '@/service/api/scaffold/menu';
 import { BasicForm, useForm } from '@/components/basic/form';
 
@@ -44,7 +45,16 @@ const [registerForm, { resetFields }] = useForm({
       }
     },
     { field: 'title', label: '菜单名称', component: 'Input', span: 14 },
-    { field: 'name', label: '唯一标识', component: 'Input', helpMessage: '由客户端定义', span: 8 },
+    {
+      field: 'name',
+      label: '唯一标识',
+      component: 'Input',
+      helpMessage: '由客户端定义',
+      span: 8,
+      onChange({ model }) {
+        model.path = transformRouteNameToRoutePath(model.name);
+      }
+    },
     { field: 'path', label: '路由Path', component: 'Input', span: 16, dynamicDisabled: true },
     {
       field: 'keepalive',

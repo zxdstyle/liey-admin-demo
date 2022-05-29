@@ -31,7 +31,7 @@ type (
 
 	UserRoute struct {
 		ID        uint                  `json:"-"`
-		ParentId  *uint                 `json:"parent-id"`
+		ParentId  *uint                 `json:"-"`
 		Name      *string               `json:"name"`
 		Path      *string               `json:"path"`
 		Component *enums.RouteComponent `json:"component,omitempty"`

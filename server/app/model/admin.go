@@ -39,6 +39,10 @@ func (r Admins) GetModel(i int) bases.RepositoryModel {
 	return r[i]
 }
 
+func (r Admins) Len() int {
+	return len(r)
+}
+
 func (Admin) GuardName() string {
 	return "api"
 }

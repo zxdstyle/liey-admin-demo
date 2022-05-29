@@ -53,7 +53,9 @@ declare namespace Service {
     /** 表示后端消息的属性字段 */
     msgKey: string;
     /** 后端业务上定义的成功请求的状态 */
-    successCode: number | string;
+    successCode: number[] | string[];
+    /** 后端业务上定义的额外信息 */
+    metaKey: string;
   }
 
   /** 自定义的请求成功结果 */
@@ -62,6 +64,7 @@ declare namespace Service {
     error: null;
     /** 请求数据 */
     data: T;
+    meta: ApiResponseMeta;
   }
 
   /** 自定义的请求失败结果 */

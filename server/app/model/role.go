@@ -5,9 +5,8 @@ import "github.com/zxdstyle/liey-admin/framework/http/bases"
 type (
 	Role struct {
 		bases.Model
-		Name    *string `gorm:"not null;type:varchar(64);unique;comment:角色名称" json:"name,omitempty" v:"required,unique-db=roles"`
-		Status  *int    `gorm:"not null;type:tinyint;default:1;comment:状态 0：禁用 1：启用" json:"status,omitempty"`
-		SortNum *int    `gorm:"not null;type:int;default:1;comment:排序值" json:"sort_num,omitempty"`
+		Name *string `gorm:"not null;type:varchar(64);comment:角色名称" json:"name,omitempty" v:"required"`
+		Slug *string `gorm:"not null;type:varchar(32);unique;comment:角色标识" json:"slug,omitempty" v:"required,unique-db=roles"`
 
 		Permissions *Permissions `gorm:"many2many:role_has_permissions;" json:"permissions,omitempty"`
 	}
@@ -20,4 +19,8 @@ func (r Roles) GetModel(i int) bases.RepositoryModel {
 		return &Role{}
 	}
 	return r[i]
+}
+
+func (r Roles) Len() int {
+	return len(r)
 }

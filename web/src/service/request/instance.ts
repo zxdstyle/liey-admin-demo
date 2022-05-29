@@ -1,6 +1,5 @@
 import axios from 'axios';
 import type { AxiosRequestConfig, AxiosInstance, AxiosError } from 'axios';
-import { REFRESH_TOKEN_CODE } from '@/config';
 import { useAuthStore } from '@/store';
 import {
   getToken,
@@ -8,9 +7,10 @@ import {
   handleAxiosError,
   handleResponseError,
   handleBackendError,
-  handleServiceResult
+  handleServiceResult,
+  handleServiceSuccess,
+  setToken
 } from '@/utils';
-import { handleRefreshToken } from './helpers';
 
 /**
  * 封装axios请求类
@@ -32,7 +32,8 @@ export default class CustomAxiosInstance {
       codeKey: 'code',
       dataKey: 'data',
       msgKey: 'message',
-      successCode: 200
+      successCode: [200, 201, 202, 204],
+      metaKey: 'meta'
     }
   ) {
     this.backendConfig = backendConfig;
@@ -64,18 +65,14 @@ export default class CustomAxiosInstance {
         const { status } = response;
         if (status === 200 || status < 300 || status === 304) {
           const backend = response.data;
-          const { codeKey, dataKey, successCode } = this.backendConfig;
+          const { dataKey, successCode, metaKey } = this.backendConfig;
           // 请求成功
-          if (backend[codeKey] === successCode) {
-            return handleServiceResult(null, backend[dataKey]);
+          if (successCode.indexOf(response.status as never) >= 0) {
+            return handleServiceSuccess(backend[dataKey], backend[metaKey]);
           }
 
-          // token失效, 刷新token
-          if (REFRESH_TOKEN_CODE.includes(backend[codeKey])) {
-            const config = await handleRefreshToken(response.config);
-            if (config) {
-              return this.instance.request(config);
-            }
+          if (response.headers.Authorization) {
+            setToken(response.headers.Authorization);
           }
 
           const error = handleBackendError(backend, this.backendConfig);

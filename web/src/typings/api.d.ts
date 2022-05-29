@@ -1,9 +1,20 @@
 // 后端接口返回的数据类型
 
-interface ApiResponse {
+interface ApiResponse<T = any> {
   code: number;
   message: string;
-  data: any;
+  meta: ApiResponseMeta;
+  data: T;
+}
+
+interface ApiResponseMeta {
+  pagination?: Pagination;
+}
+
+interface Pagination {
+  page: number;
+  pageSize: number;
+  total: number;
 }
 
 /** 后端返回的路由相关类型 */

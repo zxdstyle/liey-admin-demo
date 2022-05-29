@@ -1,7 +1,7 @@
 import { request } from '@/service/request';
 import Resource from '@/service/api/base/resource';
 
-class Menu extends Resource {
+class Menu extends Resource<Api.Menu> {
   resource = 'menus';
 
   TreeData = (params = {}) => {

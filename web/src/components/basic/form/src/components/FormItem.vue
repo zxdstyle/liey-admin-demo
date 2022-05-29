@@ -50,6 +50,20 @@ export default defineComponent({
       };
     });
 
+    const getDisable = computed(() => {
+      const { disabled: globDisabled } = props.formProps;
+      const { dynamicDisabled } = props.schema;
+      const { disabled: itemDisabled = false } = unref(props.componentProps || {});
+      let disabled = !!globDisabled || itemDisabled;
+      if (isBoolean(dynamicDisabled)) {
+        disabled = dynamicDisabled;
+      }
+      if (isFunction(dynamicDisabled)) {
+        disabled = dynamicDisabled(unref(getValues));
+      }
+      return disabled;
+    });
+
     function getShow(): { isShow: boolean; isIfShow: boolean } {
       const { show, ifShow } = props.schema;
 
@@ -81,6 +95,10 @@ export default defineComponent({
           const target = e ? e.target : null;
           const value = target ? target.value : e;
           props.setFormModel(field, value);
+
+          if (props.schema && props.schema.onChange) {
+            props.schema.onChange(unref(getValues));
+          }
         }
       };
 
@@ -91,7 +109,8 @@ export default defineComponent({
       const compAttr: Recordable = {
         ...props.componentProps,
         ...on,
-        ...bindValue
+        ...bindValue,
+        disabled: unref(getDisable)
       };
 
       const compSlot = isFunction(renderComponentContent)
