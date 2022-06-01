@@ -1,9 +1,8 @@
 <template>
   <NButton v-bind="getBindValue" :class="getButtonClass" @click="onClick">
-    <template #default="data">
-      <Icon v-if="preIcon" :icon="preIcon" :size="iconSize" />
-      <slot v-bind="data || {}"></slot>
-      <Icon v-if="afterIcon" :icon="afterIcon" :size="iconSize" />
+    <slot></slot>
+    <template #icon>
+      <Icon v-if="icon" :icon="icon" :size="iconSize" />
     </template>
   </NButton>
 </template>
@@ -20,11 +19,7 @@ const props = defineProps({
   /**
    * Text before icon.
    */
-  preIcon: { type: String },
-  /**
-   * Text after icon.
-   */
-  afterIcon: { type: String },
+  icon: { type: String },
   /**
    * preIcon and postIcon icon size.
    * @default: 14

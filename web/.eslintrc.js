@@ -163,6 +163,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/multi-word-component-names': 'off',
     '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-shadow': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
@@ -175,7 +176,18 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true, varsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-use-before-define': ['error', { classes: true, functions: false, typedefs: false }]
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'always',
+          normal: 'never',
+          component: 'always'
+        },
+        svg: 'always',
+        math: 'always'
+      }
+    ]
   },
   overrides: [
     {

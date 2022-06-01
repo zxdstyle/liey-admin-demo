@@ -2,18 +2,19 @@
   <n-card class="rounded-xl h-full">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <n-button type="primary" @click="openCreateModal"><Icon icon="ph:plus-bold"></Icon>新增角色</n-button>
+        <n-button type="primary" @click="openCreateModal"><Icon icon="ph:plus-bold" />新增角色</n-button>
       </template>
     </BasicTable>
 
     <BasicModal style="width: 700px" @register="registerModal">
-      <RoleForm v-bind="getFormBind"></RoleForm>
+      <RoleForm v-bind="getFormBind" />
     </BasicModal>
   </n-card>
 </template>
 
 <script lang="tsx" setup>
 import { computed, onActivated, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import { TableActionHandler } from '@/components/basic/table';
 import ApiRole from '@/service/api/scaffold/role';
@@ -28,6 +29,7 @@ const state = reactive({
   model: {}
 });
 
+const router = useRouter();
 const { warning } = useBasicDialog();
 const openEditModal = (row: Api.Role) => {
   state.model = row;
@@ -45,6 +47,9 @@ const actionHandler: TableActionHandler<Api.Role> = async (action, row) => {
   switch (action) {
     case 'edit':
       openEditModal(row);
+      break;
+    case 'detail':
+      router.push(`/system/role/${row.id}`);
       break;
     case 'delete':
       warning('是否确认删除该角色？', () => handleDelete(row.id));

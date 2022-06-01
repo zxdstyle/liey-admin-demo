@@ -1,7 +1,8 @@
 import { ButtonProps } from 'naive-ui';
 
-export interface BasicButtonProps extends ButtonProps {
-  preIcon: string;
-  afterIcon: string;
+interface BasicButtonProps extends ButtonProps {
+  icon: string;
   iconSize: number;
 }
+
+export { BasicButtonProps };

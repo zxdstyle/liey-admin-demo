@@ -2,15 +2,17 @@
 declare namespace Api {
   interface Permission {
     id: number;
-    name?: string;
-    slug?: string;
-    rules?: PermissionRule[];
+    name: string;
+    slug: string;
+    parent_id: number;
+    sort_num: number;
+    rules: PermissionRule[];
+
+    children?: Permission[];
   }
 
   interface PermissionRule {
-    http_method: HttpMethod[];
+    http_methods: string[];
     http_path: string;
   }
-
-  type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 }

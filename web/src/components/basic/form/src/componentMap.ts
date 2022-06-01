@@ -21,6 +21,7 @@ import ApiTreeSelect from './components/ApiTreeSelect.vue';
 // import ApiRadioGroup from './components/ApiRadioGroup.vue';
 import RadioButtonGroup from './components/RadioButtonGroup.vue';
 import ApiSelect from './components/ApiSelect.vue';
+import ApiTransfer from './components/ApiTransfer.vue';
 // import ApiTree from './components/ApiTree.vue';
 // import ApiCascader from './components/ApiCascader.vue';
 // import { BasicUpload } from '/@/components/Upload';
@@ -48,6 +49,7 @@ componentMap.set('CheckboxGroup', NCheckbox.Group);
 componentMap.set('Cascader', NCascader);
 componentMap.set('Slider', NSlider);
 componentMap.set('Rate', NRate);
+componentMap.set('ApiTransfer', ApiTransfer);
 
 componentMap.set('DatePicker', NDatePicker);
 componentMap.set('MonthPicker', NDatePicker.MonthPicker);

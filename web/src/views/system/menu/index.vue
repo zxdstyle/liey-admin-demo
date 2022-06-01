@@ -3,12 +3,12 @@
     <BasicTable @register="registerTable">
       <template #left></template>
       <template #toolbar>
-        <n-button type="primary" @click="openCreateModal"><Icon icon="ph:plus-bold"></Icon>新增菜单</n-button>
+        <n-button type="primary" @click="openCreateModal"><Icon icon="ph:plus-bold" />新增菜单</n-button>
       </template>
     </BasicTable>
 
     <BasicModal style="width: 900px" @register="registerModal">
-      <MenuForm v-bind="getFormBind"></MenuForm>
+      <MenuForm v-bind="getFormBind" />
     </BasicModal>
   </n-card>
 </template>

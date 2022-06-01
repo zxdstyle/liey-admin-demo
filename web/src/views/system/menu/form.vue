@@ -1,5 +1,5 @@
 <template>
-  <BasicForm @register="registerForm"></BasicForm>
+  <BasicForm @register="registerForm" />
 </template>
 
 <script lang="ts" setup>
@@ -78,7 +78,6 @@ const [registerForm, { resetFields }] = useForm({
       label: '排序值',
       component: 'Slider',
       span: 16,
-      dynamicDisabled: true,
       componentProps: { max: 1000, marks: { 100: '靠后', 500: '居中', 700: '靠前', 950: '置顶' } },
       helpMessage: '值越大排序越靠前'
     },

@@ -2,6 +2,9 @@ import type { RouteRecordRaw } from 'vue-router';
 import { consoleError } from '../common';
 import { getLayoutComponent, getViewComponent } from './component';
 
+const DetailPathSuffix = 'detail';
+const EditPathSuffix = 'edit';
+
 /**
  * 获取所有固定路由的名称集合
  * @param routes - 固定路由
@@ -44,7 +47,15 @@ export function transformRouteNameToRoutePath(name: AuthRoute.RouteKey): AuthRou
 
   const splitMark: AuthRoute.RouteSplitMark = '_';
   const pathSplitMark = '/';
-  const path = name.split(splitMark).join(pathSplitMark);
+  let path = name.split(splitMark).join(pathSplitMark);
+
+  if (name.endsWith(DetailPathSuffix)) {
+    path = path.replace('/detail', '/:id');
+  }
+
+  if (name.endsWith(EditPathSuffix)) {
+    path = path.replace('/edit', '/:id/edit');
+  }
 
   return (pathSplitMark + path) as AuthRoute.RoutePath;
 }

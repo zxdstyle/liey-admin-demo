@@ -6,7 +6,7 @@
       </template>
     </BasicTable>
 
-    <BasicModal style="width: 700px" @register="registerModal">
+    <BasicModal style="width: 1000px" @register="registerModal">
       <RoleForm v-bind="getFormBind"></RoleForm>
     </BasicModal>
   </n-card>

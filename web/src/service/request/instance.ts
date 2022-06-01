@@ -87,6 +87,7 @@ export default class CustomAxiosInstance {
         if (axiosError.response?.status === 401) {
           const { resetAuthStore } = useAuthStore();
           resetAuthStore();
+          return;
         }
 
         return handleServiceResult(error, null);

@@ -116,4 +116,5 @@ export type ComponentType =
   | 'Render'
   | 'Slider'
   | 'Rate'
+  | 'ApiTransfer'
   | 'Divider';

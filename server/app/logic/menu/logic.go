@@ -22,6 +22,18 @@ func (*Logic) TreeData(ctx context.Context, req requests.Request, menus *model.M
 	return repository.Menu.TreeData(ctx, menus)
 }
 
+func (*Logic) Create(ctx context.Context, mo bases.RepositoryModel) error {
+	val := mo.(*model.Menu)
+	val.Children = nil
+	return repository.Menu.Create(ctx, mo)
+}
+
+func (*Logic) Update(ctx context.Context, mo bases.RepositoryModel) error {
+	val := mo.(*model.Menu)
+	val.Children = nil
+	return repository.Menu.Update(ctx, mo)
+}
+
 func (l *Logic) Destroy(ctx context.Context, mo bases.RepositoryModel) error {
 	var children model.Menus
 	if err := repository.Menu.GetChildren(ctx, mo.GetKey(), &children); err != nil {

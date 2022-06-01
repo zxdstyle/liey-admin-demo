@@ -1,6 +1,8 @@
 import BasicForm from './src/BasicForm.vue';
-import useForm from './src/hooks/useForm';
-import ApiSwitch from './src/components/ApiSwitch.vue';
-import ApiTreeSelect from './src/components/ApiTreeSelect.vue';
 
-export { BasicForm, useForm, ApiSwitch, ApiTreeSelect };
+export { default as useForm } from './src/hooks/useForm';
+export { default as ApiSwitch } from './src/components/ApiSwitch.vue';
+export { default as ApiTreeSelect } from './src/components/ApiTreeSelect.vue';
+export { useComponentRegister } from './src/hooks/useComponentRegister';
+
+export { BasicForm };

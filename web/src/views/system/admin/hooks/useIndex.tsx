@@ -25,7 +25,7 @@ export default function useIndex(actionHandler: TableActionHandler<Api.Admin>) {
       { key: 'avatar', title: '头像' },
       {
         key: 'is_active',
-        title: '是否隐藏',
+        title: '是否启用',
         render(row) {
           return (
             <ApiSwitch

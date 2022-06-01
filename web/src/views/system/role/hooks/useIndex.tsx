@@ -6,6 +6,7 @@ import ApiRole from '@/service/api/scaffold/role';
 export default function useIndex(actionHandler: TableActionHandler<Api.Role>) {
   const actions: TableActionOption = [
     { key: 'edit', label: '编辑', icon: iconifyRender('ep:edit', '', 18) },
+    { key: 'detail', label: '详情', icon: iconifyRender('icon-park-outline:view-grid-detail', '', 18) },
     { type: 'divider' },
     {
       key: 'delete',

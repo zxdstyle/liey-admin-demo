@@ -8,6 +8,8 @@ import (
 	"github.com/zxdstyle/liey-admin/framework/http/responses"
 )
 
+var ApiPermission = &Permission{}
+
 type Permission struct {
 }
 
@@ -22,6 +24,14 @@ func (r Permission) Index(ctx context.Context, req requests.Request) (*responses
 	}
 
 	if err := logic.Permission.All(ctx, req, mos); err != nil {
+		return nil, err
+	}
+	return responses.Success(mos), nil
+}
+
+func (r Permission) TreeData(ctx context.Context, req requests.Request) (*responses.Response, error) {
+	mos := &model.Permissions{}
+	if err := logic.Permission.TreeData(ctx, req, mos); err != nil {
 		return nil, err
 	}
 	return responses.Success(mos), nil

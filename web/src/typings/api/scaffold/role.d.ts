@@ -5,5 +5,7 @@ declare namespace Api {
     slug: string;
     created_at: string;
     updated_at: string;
+
+    permissions?: Permission[] | number[];
   }
 }

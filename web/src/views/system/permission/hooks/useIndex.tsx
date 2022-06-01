@@ -16,7 +16,7 @@ export default function useIndex(actionHandler: TableActionHandler<Api.Permissio
   ];
 
   const [registerTable, { reload }] = useTable<Api.Permission>({
-    api: ApiPermission.Index,
+    api: ApiPermission.TreeData,
     columns: [
       { type: 'selection' },
       { key: 'id', title: 'ID', sorter: { multiple: 2 } },
@@ -30,9 +30,26 @@ export default function useIndex(actionHandler: TableActionHandler<Api.Permissio
       },
       {
         key: 'rules',
-        title: '权限规则'
+        title: '权限规则',
+        render(row: Api.Permission) {
+          return (
+            <div>
+              {row.rules?.map(rule => (
+                <div class="mb-2">
+                  {rule.http_methods.map(method => (
+                    <NTag size="small" type="primary">
+                      {method}
+                    </NTag>
+                  ))}
+                  <NTag size="small">{rule.http_path}</NTag>
+                </div>
+              ))}
+            </div>
+          );
+        }
       },
       { key: 'created_at', title: '创建时间' },
+      { key: 'sort_num', title: '排序值' },
       {
         key: 'action',
         title: '操作',
@@ -40,7 +57,8 @@ export default function useIndex(actionHandler: TableActionHandler<Api.Permissio
           return <TableAction actions={actions} onSelect={(key: string) => handleAction(key, row)} />;
         }
       }
-    ]
+    ],
+    pagination: false
   });
 
   async function handleAction(key: string, row: Api.Permission) {

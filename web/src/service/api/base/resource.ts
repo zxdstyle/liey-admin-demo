@@ -5,15 +5,15 @@ export default class Resource<T> {
 
   version = 'v1';
 
-  Index = (params = {}) => {
+  Index = (params: Recordable = {}) => {
     return request.get<T[]>(`/api/${this.version}/${this.resource}`, { params });
   };
 
-  Show = (id: number) => {
+  Show = (id: number | string) => {
     return request.get<T>(`/api/${this.version}/${this.resource}/${id}`);
   };
 
-  Update = (id: number, data = {}) => {
+  Update = (id: number, data: Recordable = {}) => {
     return request.put<T>(`/api/${this.version}/${this.resource}/${id}`, data);
   };
 

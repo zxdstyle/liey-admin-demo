@@ -18,7 +18,7 @@ export interface BasicTableColumn<T> extends TableBaseColumn<T> {
 }
 
 export interface BasicTableProps<T> extends DataTableProps {
-  api?: (...arg: any) => Promise<ApiResponse>;
+  api?: (...arg: any) => Promise<any>;
   // 列配置
   columns: BasicColumn<T>[];
 
