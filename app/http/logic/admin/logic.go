@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"github.com/zxdstyle/liey-admin-demo/app/repository"
+	"github.com/zxdstyle/liey-admin-demo/app/http/repository"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
 )
 
@@ -11,6 +11,6 @@ type Logic struct {
 
 func NewLogic() *Logic {
 	return &Logic{
-		BaseLogic: bases.NewBaseLogic(repository.Admin),
+		BaseLogic: bases.NewBaseLogic(repository.Admin()),
 	}
 }

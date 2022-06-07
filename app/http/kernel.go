@@ -1,4 +1,4 @@
-package app
+package http
 
 import (
 	"github.com/zxdstyle/liey-admin-demo/app/jobs"
@@ -10,7 +10,7 @@ import (
 type Kernel struct {
 }
 
-// Boot 服务启动前进行初始化设置
+// Boot 启动前进行初始化设置
 func (Kernel) Boot() {
 	//g.Log().SetHandlers(logger.LoggingJsonHandler)
 }

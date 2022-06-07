@@ -10,7 +10,7 @@ require (
 	gorm.io/gorm v1.23.5
 )
 
-replace github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d => ../../liey-admin
+replace github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d => ../liey-admin
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.4 // indirect
@@ -58,7 +58,6 @@ require (
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/nsqio/go-nsq v1.1.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
-	github.com/qiniu/go-sdk/v7 v7.12.1 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/spf13/cobra v1.4.0 // indirect

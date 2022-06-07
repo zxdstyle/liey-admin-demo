@@ -2,7 +2,7 @@ package handler
 
 import (
 	"context"
-	"github.com/zxdstyle/liey-admin-demo/app/logic"
+	"github.com/zxdstyle/liey-admin-demo/app/http/logic"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
 	"github.com/zxdstyle/liey-admin/framework/http/responses"
