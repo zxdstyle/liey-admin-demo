@@ -8,10 +8,10 @@ default: mysql
 connections:
   default:
     driver: mysql
-    host: 127.0.0.1
+    host: 47.93.181.102
     port: 3306
     database: liey
-    username: root
+    username: zxdstyle
     password: a8968640
     # 主从配置, 配置主从之后，查询默认使用从数据库，写默认使用主数据库
     sources:
@@ -19,10 +19,3 @@ connections:
       - read
     # 负载均衡策略，目前只实现了随机（random）
     policy: random
-  read:
-    driver: mysql
-    host: 127.0.0.1
-    port: 3306
-    database: liey
-    username: root
-    password: a8968640

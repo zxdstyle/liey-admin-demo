@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/zxdstyle/liey-admin-demo/app/enums"
+	"github.com/zxdstyle/liey-admin-demo/app/http/repository"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
-	"github.com/zxdstyle/liey-admin-demo/app/repository"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
 	"github.com/zxdstyle/liey-admin/framework/support"
 	"github.com/zxdstyle/liey-admin/framework/support/crypto"
@@ -21,7 +21,7 @@ func NewLogic() *Logic {
 
 func (Logic) Login(ctx context.Context, req LoginByPwd) (*LoginResp, error) {
 	admin := model.Admin{Email: req.Email}
-	if err := repository.Admin.First(ctx, &admin); err != nil {
+	if err := repository.Admin().First(ctx, &admin); err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, fmt.Errorf("账号或密码错误")
 		}
@@ -47,7 +47,7 @@ func (Logic) Login(ctx context.Context, req LoginByPwd) (*LoginResp, error) {
 func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, error) {
 	mo := &model.Admin{}
 	mo.SetKey(req.ID())
-	if err := repository.Admin.First(ctx, mo); err != nil {
+	if err := repository.Admin().First(ctx, mo); err != nil {
 		return nil, err
 	}
 	return mo, nil
@@ -55,7 +55,7 @@ func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, 
 
 func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserRouteResp) error {
 	var menus model.Menus
-	if err := repository.Menu.TreeData(ctx, &menus); err != nil {
+	if err := repository.Menu().TreeData(ctx, &menus); err != nil {
 		return err
 	}
 	if menus == nil {
