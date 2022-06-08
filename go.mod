@@ -10,7 +10,7 @@ require (
 	gorm.io/gorm v1.23.5
 )
 
-replace github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d => ../../liey-admin
+replace github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d => ../liey-admin
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.4 // indirect
