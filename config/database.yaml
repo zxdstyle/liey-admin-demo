@@ -8,11 +8,11 @@ default: mysql
 connections:
   default:
     driver: mysql
-    host: 47.93.181.102
+    host: 127.0.0.1
     port: 3306
     database: liey
-    username: zxdstyle
-    password: a8968640
+    username: root
+    password: 123456
     # 主从配置, 配置主从之后，查询默认使用从数据库，写默认使用主数据库
     sources:
     replicas:

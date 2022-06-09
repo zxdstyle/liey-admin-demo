@@ -5,39 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="024a878e-e005-4902-8109-f307050bc82c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/http/repository/init.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/repository/init.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handler/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/handler/admin.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handler/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/handler/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handler/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/handler/menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handler/permissions.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/handler/permissions.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handler/roles.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/handler/roles.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/handler/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/kernel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/admin/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/admin/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/auth/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/auth/entity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/auth/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/auth/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/menu/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/menu/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/permission/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/permission/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logic/role/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/logic/role/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middlewares/guard.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/middlewares/guard.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/admin/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/admin/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/admin/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/admin/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/init.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/menu/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/menu/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/menu/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/menu/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/menu/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/menu/tree.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/permission/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/permission/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/permission/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/permission/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/permission/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/permission/tree.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/role/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/role/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repository/role/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/repository/role/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/console/kernel.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/handler/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/admin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/handler/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/auth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/handler/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/handler/permissions.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/permissions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/handler/roles.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/roles.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/admin/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/admin/logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/auth/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/auth/entity.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/auth/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/auth/logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/menu/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/menu/logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/permission/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/permission/logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/logic/role/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/role/logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/middlewares/guard.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middlewares/guard.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/admin/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/admin/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/admin/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/admin/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/init.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/menu/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/menu/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/menu/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/tree.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/permission/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/permission/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/permission/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/permission/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/permission/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/permission/tree.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/role/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/role/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/http/repository/role/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/role/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config/database.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/init.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/scaffold.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.go" afterDir="false" />
     </list>
@@ -68,26 +68,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/zxdstyle/workspace/liey-admin-demo",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zxdstyle/workspace/liey-admin-demo&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/console" />
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/http" />
       <recent name="$PROJECT_DIR$" />
     </key>

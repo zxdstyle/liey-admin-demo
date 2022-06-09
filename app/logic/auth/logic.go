@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/zxdstyle/liey-admin-demo/app/enums"
-	"github.com/zxdstyle/liey-admin-demo/app/http/repository"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
+	"github.com/zxdstyle/liey-admin-demo/app/repository"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
 	"github.com/zxdstyle/liey-admin/framework/support"
 	"github.com/zxdstyle/liey-admin/framework/support/crypto"
@@ -62,6 +62,7 @@ func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserR
 		return nil
 	}
 
+	resp.Home = new(string)
 	resp.Routes = l.resolveComponent(&menus)
 	return nil
 }
@@ -88,7 +89,7 @@ func (Logic) transformToRoute(menu model.Menu) UserRoute {
 }
 
 func (l Logic) resolveComponent(menus *model.Menus) *[]*UserRoute {
-	var routes []*UserRoute
+	routes := make([]*UserRoute, 0)
 	for idx, menu := range *menus {
 		route := l.transformToRoute(*(*menus)[idx])
 		if menu.Children == nil {

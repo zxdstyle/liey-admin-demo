@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gogf/gf/v2/net/ghttp"
-	"github.com/zxdstyle/liey-admin-demo/app/http/handler"
+	"github.com/zxdstyle/liey-admin-demo/app/handler"
 	"github.com/zxdstyle/liey-admin/framework/adm"
 	"github.com/zxdstyle/liey-admin/framework/http/middleware"
 	"github.com/zxdstyle/liey-admin/framework/http/server"

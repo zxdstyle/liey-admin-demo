@@ -2,8 +2,8 @@ package handler
 
 import (
 	"context"
-	"github.com/zxdstyle/liey-admin-demo/app/http/logic"
-	"github.com/zxdstyle/liey-admin-demo/app/http/logic/auth"
+	"github.com/zxdstyle/liey-admin-demo/app/logic"
+	"github.com/zxdstyle/liey-admin-demo/app/logic/auth"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
 	"github.com/zxdstyle/liey-admin/framework/http/responses"
 )
@@ -19,7 +19,7 @@ func (apiAuth) Login(ctx context.Context, req requests.Request) (*responses.Resp
 		return nil, err
 	}
 
-	resp, err := logic.Auth.Login(ctx, entity)
+	resp, err := logic.Auth().Login(ctx, entity)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +28,7 @@ func (apiAuth) Login(ctx context.Context, req requests.Request) (*responses.Resp
 }
 
 func (apiAuth) Userinfo(ctx context.Context, req requests.Request) (*responses.Response, error) {
-	resp, err := logic.Auth.Userinfo(ctx, req)
+	resp, err := logic.Auth().Userinfo(ctx, req)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func (apiAuth) Userinfo(ctx context.Context, req requests.Request) (*responses.R
 
 func (apiAuth) UserRoutes(ctx context.Context, req requests.Request) (*responses.Response, error) {
 	var resp auth.UserRouteResp
-	if err := logic.Auth.UserRoutes(ctx, req, &resp); err != nil {
+	if err := logic.Auth().UserRoutes(ctx, req, &resp); err != nil {
 		return nil, err
 	}
 	return responses.Success(resp), nil

@@ -2,6 +2,7 @@ package menu
 
 import (
 	"context"
+	"github.com/gogf/gf/v2/frame/g"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin/framework/adm"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
@@ -25,10 +26,10 @@ func (db *dbRepository) doInit() {
 	ctx := context.Background()
 	var menus model.Menus
 	if err := db.Orm.WithContext(ctx).Find(&menus).Error; err != nil {
-		panic(err)
+		g.Log().Error(ctx, err)
 	}
 	if err := db.cache.Set(ctx, menus...); err != nil {
-		panic(err)
+		g.Log().Error(ctx, err)
 	}
 }
 

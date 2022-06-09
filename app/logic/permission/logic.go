@@ -2,8 +2,8 @@ package permission
 
 import (
 	"context"
-	"github.com/zxdstyle/liey-admin-demo/app/http/repository"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
+	"github.com/zxdstyle/liey-admin-demo/app/repository"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
 )
