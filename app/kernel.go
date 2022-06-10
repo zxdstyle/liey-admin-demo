@@ -23,6 +23,10 @@ func (Kernel) Plugins() []plugins.Plugin {
 	return []plugins.Plugin{}
 }
 
+func (Kernel) Events() {
+
+}
+
 // Queues 注册队列
 func (Kernel) Queues() []job.Job {
 	return []job.Job{

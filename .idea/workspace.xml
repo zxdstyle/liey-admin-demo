@@ -7,7 +7,8 @@
     <list default="true" id="024a878e-e005-4902-8109-f307050bc82c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/liey.sql" beforeDir="false" afterPath="$PROJECT_DIR$/resources/liey.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/logic/auth/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/auth/logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/menu.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -11,7 +11,7 @@ type (
 		Path         *string `gorm:"not null;column:path;comment:路由path" json:"path" v:"required"`                //路由path
 		Title        *string `gorm:"not null;column:title;comment:标题" json:"title" v:"required"`                  //标题
 		Name         *string `gorm:"not null;column:name;comment:路由name" json:"name" v:"required"`                //路由name
-		Icon         *string `gorm:"not null;column:icon;comment:图标" json:"icon"`                                 //图标
+		Icon         *string `gorm:"not null;column:icon;comment:图标" json:"icon" v:"required"`                    //图标
 		RequiresAuth *bool   `gorm:"not null;default:1;column:requires_auth;comment:是否需要权限" json:"requires_auth"` // 是否需要权限
 		Hidden       *bool   `gorm:"not null;default:0;column:hidden;comment:是否在菜单隐藏" json:"hidden"`              //是否在菜单隐藏
 		SortNum      *int    `gorm:"not null;default:1;column:sort_num;comment:排序标记" json:"sort_num"`             //排序标记

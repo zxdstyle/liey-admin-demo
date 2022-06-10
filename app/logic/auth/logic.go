@@ -62,7 +62,8 @@ func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserR
 		return nil
 	}
 
-	resp.Home = new(string)
+	home := "/dashboard/workbench"
+	resp.Home = &home
 	resp.Routes = l.resolveComponent(&menus)
 	return nil
 }
