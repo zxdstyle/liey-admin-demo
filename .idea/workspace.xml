@@ -5,41 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="024a878e-e005-4902-8109-f307050bc82c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/repository/init.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/console/kernel.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/handler/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/admin.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/handler/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/handler/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/handler/permissions.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/permissions.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/handler/roles.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/roles.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handler/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/admin/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/admin/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/auth/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/auth/entity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/auth/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/auth/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/menu/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/menu/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/permission/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/permission/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/logic/role/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/role/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/middlewares/guard.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middlewares/guard.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/admin/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/admin/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/admin/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/admin/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/init.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/menu/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/menu/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/menu/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/tree.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/permission/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/permission/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/permission/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/permission/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/permission/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/permission/tree.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/role/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/role/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/http/repository/role/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/role/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/init.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/scaffold.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/liey.sql" beforeDir="false" afterPath="$PROJECT_DIR$/resources/liey.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +50,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zxdstyle/workspace/liey-admin-demo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zxstyle&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
@@ -95,14 +63,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/zxdstyle/liey-admin-demo">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="liey-admin-demo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build github.com/zxdstyle/liey-admin-demo (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="liey-admin-demo" />
       <working_directory value="$PROJECT_DIR$" />
@@ -119,15 +79,6 @@
       <package value="github.com/zxdstyle/liey-admin-demo" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/main.go" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="liey-admin-demo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <recent_temporary>

@@ -1,26 +1,6 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 80023
- Source Host           : localhost:3306
- Source Schema         : liey
-
- Target Server Type    : MySQL
- Target Server Version : 80023
- File Encoding         : 65001
-
- Date: 09/06/2022 17:49:20
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- ----------------------------
 -- Table structure for admins
 -- ----------------------------
-DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `created_at` datetime(3) NOT NULL COMMENT '创建时间',
@@ -34,12 +14,11 @@ CREATE TABLE `admins` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `idx_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for menus
 -- ----------------------------
-DROP TABLE IF EXISTS `menus`;
 CREATE TABLE `menus` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `created_at` datetime(3) NOT NULL COMMENT '创建时间',
@@ -56,12 +35,11 @@ CREATE TABLE `menus` (
   `is_default` tinyint(1) NOT NULL DEFAULT '0' COMMENT '默认菜单',
   PRIMARY KEY (`id`),
   KEY `idx_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for permissions
 -- ----------------------------
-DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `created_at` datetime(3) NOT NULL COMMENT '创建时间',
@@ -74,24 +52,22 @@ CREATE TABLE `permissions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `idx_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for role_has_permissions
 -- ----------------------------
-DROP TABLE IF EXISTS `role_has_permissions`;
 CREATE TABLE `role_has_permissions` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `role_id` bigint unsigned NOT NULL COMMENT '角色ID',
   `permission_id` bigint unsigned NOT NULL COMMENT '权限ID',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_role_permission` (`role_id`,`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for roles
 -- ----------------------------
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `created_at` datetime(3) NOT NULL COMMENT '创建时间',
@@ -101,12 +77,11 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `idx_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `created_at` datetime(3) NOT NULL COMMENT '创建时间',
@@ -115,6 +90,10 @@ CREATE TABLE `users` (
   `password` longtext,
   PRIMARY KEY (`id`),
   KEY `idx_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `liey`.`menus` (`id`, `created_at`, `updated_at`, `parent_id`, `path`, `title`, `name`, `icon`, `requires_auth`, `hidden`, `sort_num`, `keepalive`, `is_default`) VALUES (1, '2022-06-10 09:26:12.000', '2022-06-10 09:26:15.000', 0, '/dashboard', '控制台', 'dashboard', 'carbon:dashboard', 1, 0, 1, 1, 0);
+INSERT INTO `liey`.`menus` (`id`, `created_at`, `updated_at`, `parent_id`, `path`, `title`, `name`, `icon`, `requires_auth`, `hidden`, `sort_num`, `keepalive`, `is_default`) VALUES (2, '2022-06-10 09:27:44.000', '2022-06-10 09:27:47.000', 1, '/dashboard/analysis', '分析页', 'dashboard_analysis', 'icon-park-outline:analysis', 1, 0, 1, 1, 0);
+INSERT INTO `liey`.`menus` (`id`, `created_at`, `updated_at`, `parent_id`, `path`, `title`, `name`, `icon`, `requires_auth`, `hidden`, `sort_num`, `keepalive`, `is_default`) VALUES (3, '2022-06-10 09:28:19.000', '2022-06-10 09:28:21.000', 1, '/dashboard/workbench', '工作台', 'dashboard_workbench', 'icon-park-outline:workbench', 1, 0, 1, 1, 0);
+INSERT INTO `liey`.`menus` (`id`, `created_at`, `updated_at`, `parent_id`, `path`, `title`, `name`, `icon`, `requires_auth`, `hidden`, `sort_num`, `keepalive`, `is_default`) VALUES (4, '2022-06-10 09:29:50.000', '2022-06-10 09:29:51.000', 0, '/system', '系统管理', 'system', 'icon-park-outline:system', 1, 0, 1, 1, 0);
+INSERT INTO `liey`.`menus` (`id`, `created_at`, `updated_at`, `parent_id`, `path`, `title`, `name`, `icon`, `requires_auth`, `hidden`, `sort_num`, `keepalive`, `is_default`) VALUES (5, '2022-06-10 09:30:34.000', '2022-06-10 09:30:36.000', 4, '/system/menu', '菜单管理', 'system_menu', 'bx:food-menu', 1, 0, 1, 1, 0);

@@ -3,7 +3,6 @@ package app
 import (
 	"github.com/zxdstyle/liey-admin-demo/app/commands"
 	"github.com/zxdstyle/liey-admin-demo/app/jobs"
-	_ "github.com/zxdstyle/liey-admin-demo/database"
 	_ "github.com/zxdstyle/liey-admin-demo/routes"
 	"github.com/zxdstyle/liey-admin/console"
 	"github.com/zxdstyle/liey-admin/framework/plugins"
