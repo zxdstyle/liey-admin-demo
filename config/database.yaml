@@ -12,7 +12,7 @@ connections:
     port: 3306
     database: liey
     username: root
-    password: 123456
+    password: a8968640
     # 主从配置, 配置主从之后，查询默认使用从数据库，写默认使用主数据库
     sources:
     replicas:

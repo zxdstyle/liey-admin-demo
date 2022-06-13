@@ -2,14 +2,12 @@ package auth
 
 import (
 	"context"
-	"fmt"
 	"github.com/zxdstyle/liey-admin-demo/app/enums"
+	events2 "github.com/zxdstyle/liey-admin-demo/app/events"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin-demo/app/repository"
+	"github.com/zxdstyle/liey-admin/framework/events"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
-	"github.com/zxdstyle/liey-admin/framework/support"
-	"github.com/zxdstyle/liey-admin/framework/support/crypto"
-	"gorm.io/gorm"
 )
 
 type Logic struct {
@@ -21,27 +19,30 @@ func NewLogic() *Logic {
 
 func (Logic) Login(ctx context.Context, req LoginByPwd) (*LoginResp, error) {
 	admin := model.Admin{Email: req.Email}
-	if err := repository.Admin().First(ctx, &admin); err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return nil, fmt.Errorf("账号或密码错误")
-		}
-		return nil, err
-	}
+	//if err := repository.Admin().First(ctx, &admin); err != nil {
+	//	if err == gorm.ErrRecordNotFound {
+	//		return nil, fmt.Errorf("账号或密码错误")
+	//	}
+	//	return nil, err
+	//}
+	//
+	//if !crypto.PasswordVerify(*req.Password, *admin.Password) {
+	//	return nil, fmt.Errorf("账号或密码错误")
+	//}
+	//
+	//token, err := support.JWT().CreateToken(admin)
+	//if err != nil {
+	//	return nil, err
+	//}
 
-	if !crypto.PasswordVerify(*req.Password, *admin.Password) {
-		return nil, fmt.Errorf("账号或密码错误")
-	}
+	events.Dispatch(ctx, events2.NewUserLogin(admin))
 
-	token, err := support.JWT().CreateToken(admin)
-	if err != nil {
-		return nil, err
-	}
-
-	return &LoginResp{
-		Email:  admin.Email,
-		Avatar: admin.Avatar,
-		Token:  &token,
-	}, nil
+	//return &LoginResp{
+	//	Email:  admin.Email,
+	//	Avatar: admin.Avatar,
+	//	Token:  &token,
+	//}, nil
+	return nil, nil
 }
 
 func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, error) {

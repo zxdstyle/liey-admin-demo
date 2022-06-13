@@ -94,7 +94,7 @@ func (repo *treeRepository) makeTreeData() {
 
 func (repo *treeRepository) sortTreeData(tree *model.Menus) {
 	sort.SliceStable(*tree, func(i, j int) bool {
-		return *((*tree)[i].SortNum) > *((*tree)[j].SortNum) || (*tree)[i].ID > (*tree)[j].ID
+		return *((*tree)[i].SortNum) > *((*tree)[j].SortNum)
 	})
 
 	for _, menu := range *tree {

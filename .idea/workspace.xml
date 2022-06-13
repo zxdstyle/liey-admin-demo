@@ -8,7 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/kernel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/kernel.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/logic/auth/logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/logic/auth/logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repository/menu/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/repository/menu/tree.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/liey.sql" beforeDir="false" afterPath="$PROJECT_DIR$/resources/liey.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,14 +53,12 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zxstyle&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zxdstyle/workspace/liey-admin-demo&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/console" />
-      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/http" />
       <recent name="$PROJECT_DIR$" />
     </key>
