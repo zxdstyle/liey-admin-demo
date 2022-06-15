@@ -21,7 +21,7 @@ func NewLogic() *Logic {
 func (*Logic) Create(ctx context.Context, mo bases.RepositoryModel) error {
 	val := mo.(*model.Permission)
 	val.Children = nil
-	return repository.Permission().Update(ctx, mo)
+	return repository.Permission().Create(ctx, mo)
 }
 
 func (*Logic) Update(ctx context.Context, mo bases.RepositoryModel) error {

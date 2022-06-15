@@ -58,11 +58,12 @@ func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, 
 }
 
 func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserRouteResp) error {
-	var menus model.Menus
-	if err := repository.Menu().TreeData(ctx, &menus); err != nil {
+	var menus model.Permission
+	permissions, err := repository.Permission().GetByType(ctx, enums.PermissionTypeMenu, enums.PermissionTypePage)
+	if err != nil {
 		return err
 	}
-	if menus == nil {
+	if permissions == nil {
 		return nil
 	}
 

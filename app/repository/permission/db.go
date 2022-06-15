@@ -2,7 +2,9 @@ package permission
 
 import (
 	"context"
+	"fmt"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/zxdstyle/liey-admin-demo/app/enums"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin/framework/adm"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
@@ -31,6 +33,19 @@ func (db *dbRepository) doInit() {
 	if err := db.cache.Set(ctx, permissions...); err != nil {
 		g.Log().Error(ctx, err)
 	}
+}
+
+// GetByType 获取指定类型的权限
+func (db *dbRepository) GetByType(ctx context.Context, types ...enums.PermissionType) (model.Permissions, error) {
+	if len(types) == 0 {
+		return nil, fmt.Errorf("missing permissions types")
+	}
+
+	var permissions model.Permissions
+	if err := db.Orm.WithContext(ctx).Where("`type` IN ?", types).Find(&permissions).Error; err != nil {
+		return nil, err
+	}
+	return permissions, nil
 }
 
 func (db *dbRepository) TreeData(ctx context.Context, permissions *model.Permissions) error {

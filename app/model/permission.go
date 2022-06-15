@@ -1,30 +1,27 @@
 package model
 
 import (
+	"github.com/zxdstyle/liey-admin-demo/app/enums"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
 )
 
 type (
 	Permission struct {
 		bases.Model
-		Name     *string           `gorm:"not null;type:varchar(64);comment:名称" json:"name" v:"required"`
-		Slug     *string           `gorm:"not null;type:varchar(64);unique;comment:标识" json:"slug" v:"required,unique-db=permissions"`
-		Rules    *[]PermissionRule `gorm:"not null;serializer:json;comment:权限规则" json:"rules" v:"required,dive"`
-		ParentId *uint             `gorm:"default:0;not null;comment:父级权限" json:"parent_id" v:"required"`
-		SortNum  *int              `gorm:"default:0;not null;comment:排序值" json:"sort_num"`
+		ParentId    *uint                 `gorm:"column:parent_id" json:"parent_id" v:"required,min=0"`                 //父级权限
+		Type        *enums.PermissionType `gorm:"column:type" json:"type" v:"required,oneof=menu page action"`          //权限类型
+		Slug        *string               `gorm:"column:slug" json:"slug" v:"required,unique-db=permissions"`           //唯一标识
+		Path        *string               `gorm:"column:path" json:"path" v:"required"`                                 //path
+		Title       *string               `gorm:"column:title;default:''" json:"title" v:"required_unless=type action"` //标题
+		Icon        *string               `gorm:"column:icon;default:''" json:"icon" v:"required_if=type menu"`         //图标
+		RequireAuth *bool                 `gorm:"column:require_auth;default:1" json:"require_auth"`                    //是否需要权限
+		SortNum     *int                  `gorm:"column:sort_num;default:0" json:"sort_num"`                            //排序值
 
 		Children *Permissions `gorm:"-" json:"children,omitempty"`
 		Roles    *Roles       `gorm:"many2many:role_has_permissions;" json:"roles,omitempty"`
 	}
 
 	Permissions []*Permission
-
-	PermissionRule struct {
-		HttpMethods *[]string `json:"http_methods" v:"required"`
-		HttpPath    *string   `json:"http_path" v:"required"`
-	}
-
-	PermissionRules []PermissionRule
 )
 
 func (r Permissions) GetModel(i int) bases.RepositoryModel {
