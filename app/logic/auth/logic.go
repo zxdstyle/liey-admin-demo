@@ -58,7 +58,6 @@ func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, 
 }
 
 func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserRouteResp) error {
-	var menus model.Permission
 	permissions, err := repository.Permission().GetByType(ctx, enums.PermissionTypeMenu, enums.PermissionTypePage)
 	if err != nil {
 		return err
@@ -67,34 +66,43 @@ func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserR
 		return nil
 	}
 
+	if err := repository.Permission().TreeData(ctx, &permissions); err != nil {
+		return err
+	}
+
 	home := "/dashboard/workbench"
 	resp.Home = &home
-	resp.Routes = l.resolveComponent(&menus)
+	resp.Routes = l.resolveComponent(&permissions)
 	return nil
 }
 
 // 菜单转换为路由格式
-func (Logic) transformToRoute(menu model.Menu) UserRoute {
-	return UserRoute{
-		ID:        menu.ID,
-		Name:      menu.Name,
-		Path:      menu.Path,
+func (Logic) transformToRoute(p model.Permission) UserRoute {
+	r := UserRoute{
+		ID:        p.ID,
+		Name:      p.Slug,
+		Path:      p.Path,
 		Component: &enums.RouteComponentBasic,
-		ParentId:  menu.ParentId,
+		ParentId:  p.ParentId,
 		Meta: &RouteMeta{
-			Title:        menu.Title,
-			RequiresAuth: menu.RequiresAuth,
-			KeepAlive:    menu.Keepalive,
-			Icon:         menu.Icon,
-			Hide:         menu.Hidden,
-			//Href:         menu.Path,
-			Order: menu.SortNum,
+			Title:        p.Title,
+			RequiresAuth: p.RequireAuth,
+			KeepAlive:    p.Keepalive,
+			Icon:         p.Icon,
+			Order:        p.SortNum,
+			Hide:         new(bool),
 		},
 		Children: nil,
 	}
+
+	if *p.Type != enums.PermissionTypeMenu {
+		r.Meta.Hide = &enums.True
+	}
+
+	return r
 }
 
-func (l Logic) resolveComponent(menus *model.Menus) *[]*UserRoute {
+func (l Logic) resolveComponent(menus *model.Permissions) *[]*UserRoute {
 	routes := make([]*UserRoute, 0)
 	for idx, menu := range *menus {
 		route := l.transformToRoute(*(*menus)[idx])

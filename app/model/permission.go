@@ -16,6 +16,7 @@ type (
 		Icon        *string               `gorm:"column:icon;default:''" json:"icon" v:"required_if=type menu"`         //图标
 		RequireAuth *bool                 `gorm:"column:require_auth;default:1" json:"require_auth"`                    //是否需要权限
 		SortNum     *int                  `gorm:"column:sort_num;default:0" json:"sort_num"`                            //排序值
+		Keepalive   *bool                 `gorm:"column:keepalive;default:1" json:"keepalive"`
 
 		Children *Permissions `gorm:"-" json:"children,omitempty"`
 		Roles    *Roles       `gorm:"many2many:role_has_permissions;" json:"roles,omitempty"`

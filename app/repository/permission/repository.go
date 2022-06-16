@@ -15,6 +15,15 @@ type (
 		GetChildren(ctx context.Context, pid uint, permissions *model.Permissions) error
 	}
 
+	CacheRepository interface {
+		Sets(ctx context.Context, mos model.Permissions) error
+		Set(ctx context.Context, mo model.Permission) error
+		Get(ctx context.Context, key uint) (mo model.Permission, err error)
+		Gets(ctx context.Context, keys ...uint) (mos model.Permissions, err error)
+		Del(ctx context.Context, keys ...uint) error
+		Data(ctx context.Context) map[uint]model.Permission
+	}
+
 	TreeRepository interface {
 		Set(ctx context.Context, permissions ...*model.Permission) error
 		Get(ctx context.Context, key uint) (*model.Permission, error)
