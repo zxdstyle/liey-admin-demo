@@ -58,8 +58,8 @@ func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, 
 }
 
 func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserRouteResp) error {
-	permissions, err := repository.Permission().GetByType(ctx, enums.PermissionTypeMenu, enums.PermissionTypePage)
-	if err != nil {
+	var permissions model.Permissions
+	if err := repository.Permission().GetRoutes(ctx, &permissions); err != nil {
 		return err
 	}
 	if permissions == nil {
@@ -106,15 +106,26 @@ func (l Logic) resolveComponent(menus *model.Permissions) *[]*UserRoute {
 	routes := make([]*UserRoute, 0)
 	for idx, menu := range *menus {
 		route := l.transformToRoute(*(*menus)[idx])
-		if menu.Children == nil {
+		if *menu.Type == enums.PermissionTypePage || menu.Children == nil || !l.containMenu(*menu.Children) {
 			route.Component = &enums.RouteComponentSelf
 		} else if menu.ParentId != nil && *menu.ParentId != 0 {
 			route.Component = &enums.RouteComponentMulti
-			route.Children = l.resolveComponent((*menus)[idx].Children)
-		} else {
+		}
+
+		if menu.Children != nil {
 			route.Children = l.resolveComponent((*menus)[idx].Children)
 		}
+
 		routes = append(routes, &route)
 	}
 	return &routes
+}
+
+func (l Logic) containMenu(permissions model.Permissions) bool {
+	for _, permission := range permissions {
+		if *permission.Type == enums.PermissionTypeMenu {
+			return true
+		}
+	}
+	return false
 }

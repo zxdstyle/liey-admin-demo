@@ -70,6 +70,16 @@ func (repo *memoryRepository) Gets(ctx context.Context, keys ...uint) (mos model
 	return mos, err
 }
 
+func (repo *memoryRepository) Iterator(f func(key uint, permission model.Permission) bool) {
+	repo.locker.RLock()
+	defer repo.locker.RUnlock()
+	for k, v := range repo.data {
+		if !f(k, v) {
+			break
+		}
+	}
+}
+
 func (repo *memoryRepository) Del(ctx context.Context, keys ...uint) error {
 	repo.locker.Lock()
 	defer repo.locker.Unlock()

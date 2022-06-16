@@ -2,7 +2,6 @@ package permission
 
 import (
 	"context"
-	"fmt"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/zxdstyle/liey-admin-demo/app/enums"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
@@ -13,15 +12,13 @@ import (
 
 type dbRepository struct {
 	*bases.GormRepository
-	routes  CacheRepository
-	actions CacheRepository
+	memory CacheRepository
 }
 
 func NewDbRepository() *dbRepository {
 	r := &dbRepository{
 		GormRepository: bases.NewGormRepository(adm.DB().Model(model.Permission{})),
-		routes:         newMemoryRepository(),
-		actions:        newMemoryRepository(),
+		memory:         newMemoryRepository(),
 	}
 	r.doInit()
 	return r
@@ -38,17 +35,15 @@ func (db *dbRepository) doInit() {
 	}
 }
 
-// GetByType 获取指定类型的权限
-func (db *dbRepository) GetByType(ctx context.Context, types ...enums.PermissionType) (model.Permissions, error) {
-	if len(types) == 0 {
-		return nil, fmt.Errorf("missing permissions types")
-	}
-
-	var permissions model.Permissions
-	if err := db.Orm.WithContext(ctx).Where("`type` IN ?", types).Find(&permissions).Error; err != nil {
-		return nil, err
-	}
-	return permissions, nil
+// GetRoutes 获取指定类型的权限
+func (db *dbRepository) GetRoutes(ctx context.Context, permissions *model.Permissions) error {
+	db.memory.Iterator(func(key uint, permission model.Permission) bool {
+		if *permission.Type == enums.PermissionTypePage || *permission.Type == enums.PermissionTypeMenu {
+			*permissions = append(*permissions, &permission)
+		}
+		return true
+	})
+	return nil
 }
 
 func (db *dbRepository) TreeData(ctx context.Context, permissions *model.Permissions) error {
