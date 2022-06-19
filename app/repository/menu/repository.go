@@ -9,8 +9,12 @@ import (
 type (
 	Repository interface {
 		bases.Repository
-		TreeData(ctx context.Context, menus *model.Menus) error
+		GetMenusByRoles(ctx context.Context, roles []uint, menus *model.Menus) error
 		GetChildren(ctx context.Context, pid uint, menus *model.Menus) error
+		AttachRoles(ctx context.Context, menu *model.Menu, roles *model.Roles) error
+		SyncRoles(ctx context.Context, menu *model.Menu, roles *model.Roles) error
+		MakeTreeData(menus *model.Menus) error
+		SortTreeData(tree *model.Menus)
 	}
 
 	TreeRepository interface {

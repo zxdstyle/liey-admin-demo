@@ -21,10 +21,10 @@ type (
 
 	RouteMeta struct {
 		Title        *string `json:"title"`
-		RequiresAuth *bool   `json:"requiresAuth"`
-		KeepAlive    *bool   `json:"keepAlive"`
-		Icon         *string `json:"icon"`
-		Hide         *bool   `json:"hide"`
+		RequiresAuth *bool   `json:"requiresAuth,omitempty"`
+		KeepAlive    *bool   `json:"keepAlive,omitempty"`
+		Icon         *string `json:"icon,omitempty"`
+		Hide         *bool   `json:"hide,omitempty"`
 		Href         *string `json:"href,omitempty"`
 		Order        *int    `json:"order,omitempty"`
 	}

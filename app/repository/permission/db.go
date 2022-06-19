@@ -37,13 +37,7 @@ func (db *dbRepository) doInit() {
 
 // GetRoutes 获取指定类型的权限
 func (db *dbRepository) GetRoutes(ctx context.Context, permissions *model.Permissions) error {
-	db.memory.Iterator(func(key uint, permission model.Permission) bool {
-		if *permission.Type == enums.PermissionTypePage || *permission.Type == enums.PermissionTypeMenu {
-			*permissions = append(*permissions, &permission)
-		}
-		return true
-	})
-	return nil
+	return db.Orm.WithContext(ctx).Where("`type` = ? OR `type` = ?", enums.PermissionTypeMenu, enums.PermissionTypePage).Find(permissions).Error
 }
 
 func (db *dbRepository) TreeData(ctx context.Context, permissions *model.Permissions) error {

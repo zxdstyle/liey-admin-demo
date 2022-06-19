@@ -3,9 +3,10 @@ module github.com/zxdstyle/liey-admin-demo
 go 1.17
 
 require (
-	github.com/casbin/casbin/v2 v2.45.0
-	github.com/casbin/gorm-adapter/v3 v3.6.0
+	github.com/casbin/casbin/v2 v2.47.3
+	github.com/casbin/gorm-adapter/v3 v3.7.2
 	github.com/gogf/gf/v2 v2.0.6
+	github.com/spf13/cobra v1.4.0
 	github.com/zxdstyle/liey-admin v0.0.0-20220426134426-39c8f9a9774d
 	gorm.io/gorm v1.23.5
 )
@@ -60,7 +61,6 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/spf13/cobra v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	go.opentelemetry.io/otel v1.7.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.7.0 // indirect

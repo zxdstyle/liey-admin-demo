@@ -8,6 +8,7 @@ import (
 
 type Repository interface {
 	bases.Repository
+	GetRoles(ctx context.Context, uid uint, roles *model.Roles) error
 	AttachPermissions(ctx context.Context, role *model.Role, permissions *model.Permissions) error
 	SyncPermissions(ctx context.Context, role *model.Role, permissions *model.Permissions) error
 }

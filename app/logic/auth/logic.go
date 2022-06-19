@@ -3,11 +3,13 @@ package auth
 import (
 	"context"
 	"fmt"
+	"github.com/gogf/gf/v2/container/gset"
 	"github.com/zxdstyle/liey-admin-demo/app/enums"
 	events2 "github.com/zxdstyle/liey-admin-demo/app/events"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin-demo/app/repository"
 	"github.com/zxdstyle/liey-admin/framework/events"
+	"github.com/zxdstyle/liey-admin/framework/http/queryBuilder/clauses"
 	"github.com/zxdstyle/liey-admin/framework/http/requests"
 	"github.com/zxdstyle/liey-admin/framework/support"
 	"github.com/zxdstyle/liey-admin/framework/support/crypto"
@@ -58,55 +60,84 @@ func (Logic) Userinfo(ctx context.Context, req requests.Request) (*model.Admin, 
 }
 
 func (l Logic) UserRoutes(ctx context.Context, req requests.Request, resp *UserRouteResp) error {
-	var permissions model.Permissions
-	if err := repository.Permission().GetRoutes(ctx, &permissions); err != nil {
-		return err
-	}
-	if permissions == nil {
-		return nil
-	}
-
-	if err := repository.Permission().TreeData(ctx, &permissions); err != nil {
+	var menus model.Menus
+	req.AddClauses(clauses.NewPreloadClause("with.roles", "*"))
+	if err := repository.Menu().All(ctx, req, &menus); err != nil {
 		return err
 	}
 
-	home := "/dashboard/workbench"
+	if er := repository.Menu().MakeTreeData(&menus); er != nil {
+		return er
+	}
+
+	authID := req.ID()
+	var roles model.Roles
+	if err := repository.Role().GetRoles(ctx, authID, &roles); err != nil {
+		return err
+	}
+
+	roleID := gset.NewIntSet()
+	for _, role := range roles {
+		roleID.Add(int(role.GetKey()))
+	}
+
+	menus = l.cleanUnauthorized(menus, roleID)
+
+	home := "dashboard_workbench"
 	resp.Home = &home
-	resp.Routes = l.resolveComponent(&permissions)
+	resp.Routes = l.resolveComponent(&menus)
 	return nil
 }
 
+func (l *Logic) cleanUnauthorized(menus model.Menus, roles *gset.IntSet) model.Menus {
+	routes := model.Menus{}
+	for i, menu := range menus {
+		if menu.Roles == nil {
+			continue
+		}
+
+		for _, role := range *menu.Roles {
+			if roles.Contains(int(role.GetKey())) {
+				routes = append(routes, menus[i])
+				goto next
+			}
+		}
+
+	next:
+
+		if menu.Children != nil {
+			children := l.cleanUnauthorized(*menu.Children, roles)
+			menu.Children = &children
+		}
+	}
+	return routes
+}
+
 // 菜单转换为路由格式
-func (Logic) transformToRoute(p model.Permission) UserRoute {
-	r := UserRoute{
+func (Logic) transformToRoute(p model.Menu) UserRoute {
+	return UserRoute{
 		ID:        p.ID,
-		Name:      p.Slug,
+		Name:      p.Name,
 		Path:      p.Path,
 		Component: &enums.RouteComponentBasic,
 		ParentId:  p.ParentId,
 		Meta: &RouteMeta{
 			Title:        p.Title,
-			RequiresAuth: p.RequireAuth,
+			RequiresAuth: p.RequiresAuth,
 			KeepAlive:    p.Keepalive,
 			Icon:         p.Icon,
 			Order:        p.SortNum,
-			Hide:         new(bool),
+			Hide:         p.Hidden,
 		},
 		Children: nil,
 	}
-
-	if *p.Type != enums.PermissionTypeMenu {
-		r.Meta.Hide = &enums.True
-	}
-
-	return r
 }
 
-func (l Logic) resolveComponent(menus *model.Permissions) *[]*UserRoute {
+func (l Logic) resolveComponent(menus *model.Menus) *[]*UserRoute {
 	routes := make([]*UserRoute, 0)
 	for idx, menu := range *menus {
 		route := l.transformToRoute(*(*menus)[idx])
-		if *menu.Type == enums.PermissionTypePage || menu.Children == nil || !l.containMenu(*menu.Children) {
+		if menu.Children == nil {
 			route.Component = &enums.RouteComponentSelf
 		} else if menu.ParentId != nil && *menu.ParentId != 0 {
 			route.Component = &enums.RouteComponentMulti
@@ -119,13 +150,4 @@ func (l Logic) resolveComponent(menus *model.Permissions) *[]*UserRoute {
 		routes = append(routes, &route)
 	}
 	return &routes
-}
-
-func (l Logic) containMenu(permissions model.Permissions) bool {
-	for _, permission := range permissions {
-		if *permission.Type == enums.PermissionTypeMenu {
-			return true
-		}
-	}
-	return false
 }

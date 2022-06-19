@@ -17,6 +17,10 @@ func NewDbRepository() *dbRepository {
 	}
 }
 
+func (repo *dbRepository) GetRoles(ctx context.Context, uid uint, roles *model.Roles) error {
+	return repo.Orm.WithContext(ctx).Joins("INNER JOIN `user_has_roles` ON `role_id` = `roles`.`id`").Where("`user_id` = ?", uid).Find(&roles).Error
+}
+
 // AttachPermissions 添加权限
 func (repo *dbRepository) AttachPermissions(ctx context.Context, role *model.Role, permissions *model.Permissions) error {
 	if role == nil || permissions == nil {

@@ -19,6 +19,7 @@ type (
 		IsDefault    *bool   `gorm:"not null;default:0;column:is_default;comment:默认菜单" json:"is_default"`         //默认菜单
 
 		Children *Menus `gorm:"-" json:"children,omitempty"`
+		Roles    *Roles `gorm:"many2many:role_has_menus" json:"roles,omitempty"`
 	}
 
 	Menus []*Menu

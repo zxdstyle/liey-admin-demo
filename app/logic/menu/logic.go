@@ -19,19 +19,33 @@ func NewLogic() *Logic {
 }
 
 func (*Logic) TreeData(ctx context.Context, req requests.Request, menus *model.Menus) error {
-	return repository.Menu().TreeData(ctx, menus)
+	if err := repository.Menu().All(ctx, req, menus); err != nil {
+		return err
+	}
+	if err := repository.Menu().MakeTreeData(menus); err != nil {
+		return err
+	}
+	repository.Menu().SortTreeData(menus)
+	return nil
 }
 
 func (*Logic) Create(ctx context.Context, mo bases.RepositoryModel) error {
 	val := mo.(*model.Menu)
 	val.Children = nil
-	return repository.Menu().Create(ctx, mo)
+	if err := repository.Menu().Create(ctx, mo); err != nil {
+		return err
+	}
+	return repository.Menu().AttachRoles(ctx, val, val.Roles)
 }
 
 func (*Logic) Update(ctx context.Context, mo bases.RepositoryModel) error {
 	val := mo.(*model.Menu)
 	val.Children = nil
-	return repository.Menu().Update(ctx, mo)
+	if err := repository.Menu().Update(ctx, mo); err != nil {
+		return err
+	}
+
+	return repository.Menu().SyncRoles(ctx, val, val.Roles)
 }
 
 func (l *Logic) Destroy(ctx context.Context, mo bases.RepositoryModel) error {
