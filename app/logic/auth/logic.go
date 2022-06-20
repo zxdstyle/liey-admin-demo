@@ -103,12 +103,12 @@ func (l *Logic) cleanUnauthorized(menus model.Menus, roles *gset.IntSet) model.M
 			}
 		}
 
-	next:
-
 		if menu.Children != nil {
 			children := l.cleanUnauthorized(*menu.Children, roles)
 			menu.Children = &children
 		}
+
+	next:
 	}
 	return routes
 }
@@ -144,7 +144,11 @@ func (l Logic) resolveComponent(menus *model.Menus) *[]*UserRoute {
 		}
 
 		if menu.Children != nil {
-			route.Children = l.resolveComponent((*menus)[idx].Children)
+			if len(*menu.Children) == 0 {
+				route.Children = nil
+			} else {
+				route.Children = l.resolveComponent((*menus)[idx].Children)
+			}
 		}
 
 		routes = append(routes, &route)

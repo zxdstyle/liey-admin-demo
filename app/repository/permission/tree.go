@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/zxdstyle/liey-admin-demo/app/model"
-	"sort"
 	"sync"
 )
 
@@ -88,18 +87,5 @@ func (repo *treeRepository) makeTreeData() {
 			}
 		}
 	}
-	repo.sortTreeData(&tree)
 	repo.treeData = &tree
-}
-
-func (repo *treeRepository) sortTreeData(tree *model.Permissions) {
-	sort.SliceStable(*tree, func(i, j int) bool {
-		return *((*tree)[i].SortNum) > *((*tree)[j].SortNum) || (*tree)[i].ID > (*tree)[j].ID
-	})
-
-	for _, Permissions := range *tree {
-		if Permissions.Children != nil && len(*Permissions.Children) > 0 {
-			repo.sortTreeData(Permissions.Children)
-		}
-	}
 }

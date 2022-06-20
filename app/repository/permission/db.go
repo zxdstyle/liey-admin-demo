@@ -7,7 +7,6 @@ import (
 	"github.com/zxdstyle/liey-admin-demo/app/model"
 	"github.com/zxdstyle/liey-admin/framework/adm"
 	"github.com/zxdstyle/liey-admin/framework/http/bases"
-	"sort"
 )
 
 type dbRepository struct {
@@ -104,18 +103,5 @@ func (db *dbRepository) makeTreeData(ctx context.Context, permissions map[uint]m
 			}
 		}
 	}
-	db.sortTreeData(&tree)
 	return tree
-}
-
-func (db *dbRepository) sortTreeData(tree *model.Permissions) {
-	sort.SliceStable(*tree, func(i, j int) bool {
-		return *((*tree)[i].SortNum) > *((*tree)[j].SortNum) || (*tree)[i].ID > (*tree)[j].ID
-	})
-
-	for _, Permissions := range *tree {
-		if Permissions.Children != nil && len(*Permissions.Children) > 0 {
-			db.sortTreeData(Permissions.Children)
-		}
-	}
 }
